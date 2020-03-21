@@ -1,10 +1,9 @@
-uuid: 66025460-ba81-4802-9358-c194a277b1be
+uuid: 4589d149-9315-4557-b765-651e9c9679f6
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.node.field_alma_mater
-    - field.storage.node.field_exit_term
     - field.storage.node.field_matriculation_year
     - field.storage.node.field_neuroscience_interests
     - field.storage.node.field_profile_image
@@ -19,21 +18,15 @@ dependencies:
     - taxonomy.vocabulary.research_area
     - taxonomy.vocabulary.thesis_lab
     - taxonomy.vocabulary.undergraduate_major
-    - user.role.administrator
-    - user.role.alumni
-    - user.role.current_student
-    - user.role.deputy_admin
-    - user.role.glossary_editor
   module:
     - image
-    - neuronet_misc
     - node
     - taxonomy
     - user
     - views_bootstrap
     - views_bulk_operations
-id: current_students
-label: 'Current Students'
+id: current_students_redux
+label: 'Current Students Redux'
 module: views
 description: ''
 tag: ''
@@ -65,7 +58,7 @@ display:
         type: basic
         options:
           submit_button: Apply
-          reset_button: false
+          reset_button: true
           reset_button_label: Reset
           exposed_sorts_label: 'Sort by'
           expose_sort_order: true
@@ -95,11 +88,15 @@ display:
       style:
         type: views_bootstrap_grid
         options:
-          grouping: {  }
+          grouping:
+            -
+              field: field_matriculation_year
+              rendered: false
+              rendered_strip: true
           row_class: ''
           default_row_class: true
           alignment: horizontal
-          columns: '999'
+          columns: '4'
           col_xs: col-xs-12
           col_sm: col-sm-6
           col_md: col-md-4
@@ -775,7 +772,7 @@ display:
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
-      use_ajax: false
+      use_ajax: true
       filter_groups:
         operator: AND
         groups:
@@ -799,206 +796,15 @@ display:
     display_title: Page
     position: 1
     display_options:
-      display_extenders:
-        views_ef_fieldset:
-          views_ef_fieldset:
-            enabled: 1
-            options:
-              sort:
-                root:
-                  container_type: container
-                  title: ''
-                  description: ''
-                  open: '1'
-                  weight: '0'
-                  id: root
-                  pid: ''
-                  depth: '0'
-                  type: container
-                container-1:
-                  container_type: container
-                  title: ''
-                  description: ''
-                  open: '1'
-                  weight: '-23'
-                  id: container-1
-                  pid: root
-                  depth: '1'
-                  type: container
-                title:
-                  weight: '-23'
-                  id: title
-                  pid: container-1
-                  depth: '2'
-                  type: filter
-                term_node_tid_depth:
-                  weight: '-22'
-                  id: term_node_tid_depth
-                  pid: container-1
-                  depth: '2'
-                  type: filter
-                submit:
-                  weight: '-20'
-                  id: submit
-                  pid: container-1
-                  depth: '2'
-                  type: buttons
-                container-0:
-                  container_type: details
-                  title: 'Advanced Search'
-                  description: ''
-                  weight: '-21'
-                  open: 0
-                  id: container-0
-                  pid: root
-                  depth: '1'
-                  type: container
-                field_locations_lived_target_id:
-                  weight: '-22'
-                  id: field_locations_lived_target_id
-                  pid: container-0
-                  depth: '2'
-                  type: filter
-                field_matriculation_year_target_id:
-                  weight: '-21'
-                  id: field_matriculation_year_target_id
-                  pid: container-0
-                  depth: '2'
-                  type: filter
-                field_ngg_activities_target_id:
-                  weight: '-20'
-                  id: field_ngg_activities_target_id
-                  pid: container-0
-                  depth: '2'
-                  type: filter
-                field_candidacy__target_id:
-                  weight: '-19'
-                  id: field_candidacy__target_id
-                  pid: container-0
-                  depth: '2'
-                  type: filter
-                field_thesis_committee_target_id:
-                  weight: '-18'
-                  id: field_thesis_committee_target_id
-                  pid: container-0
-                  depth: '2'
-                  type: filter
-                field_thesis_lab_target_id:
-                  weight: '-17'
-                  id: field_thesis_lab_target_id
-                  pid: container-0
-                  depth: '2'
-                  type: filter
-                field_alma_mater_target_id:
-                  weight: '-16'
-                  id: field_alma_mater_target_id
-                  pid: container-0
-                  depth: '2'
-                  type: filter
-                reset:
-                  weight: '-21'
-                  id: reset
-                  pid: root
-                  depth: '1'
-                  type: buttons
-                container-2:
-                  container_type: details
-                  title: 'Container 2'
-                  description: ''
-                  weight: '-20'
-                  open: 0
-                  id: container-2
-                  pid: root
-                  depth: '1'
-                  type: container
-                container-3:
-                  container_type: details
-                  title: 'Container 3'
-                  description: ''
-                  weight: '-19'
-                  open: 0
-                  id: container-3
-                  pid: root
-                  depth: '1'
-                  type: container
-                container-4:
-                  container_type: details
-                  title: 'Container 4'
-                  description: ''
-                  weight: '-18'
-                  open: 0
-                  id: container-4
-                  pid: root
-                  depth: '1'
-                  type: container
-                container-5:
-                  container_type: details
-                  title: 'Container 5'
-                  description: ''
-                  weight: '-17'
-                  open: 0
-                  id: container-5
-                  pid: root
-                  depth: '1'
-                  type: container
-                container-6:
-                  container_type: details
-                  title: 'Container 6'
-                  description: ''
-                  weight: '-16'
-                  open: 0
-                  id: container-6
-                  pid: root
-                  depth: '1'
-                  type: container
-                container-7:
-                  container_type: details
-                  title: 'Container 7'
-                  description: ''
-                  weight: '-15'
-                  open: 0
-                  id: container-7
-                  pid: root
-                  depth: '1'
-                  type: container
-                container-8:
-                  container_type: details
-                  title: 'Container 8'
-                  description: ''
-                  weight: '-14'
-                  open: 0
-                  id: container-8
-                  pid: root
-                  depth: '1'
-                  type: container
-                container-9:
-                  container_type: details
-                  title: 'Container 9'
-                  description: ''
-                  weight: '-13'
-                  open: 0
-                  id: container-9
-                  pid: root
-                  depth: '1'
-                  type: container
-                container-10:
-                  container_type: details
-                  title: 'Container 10'
-                  description: ''
-                  weight: '-10'
-                  open: 0
-                  id: container-10
-                  pid: root
-                  depth: '1'
-                  type: container
-      path: secure/people/students
+      display_extenders: {  }
+      path: current-students-redux
       menu:
-        type: 'default tab'
+        type: none
         title: 'Current Students'
         description: ''
         expanded: false
         parent: ''
-        weight: -5
+        weight: 0
         context: '0'
         menu_name: main
       fields:
@@ -1300,9 +1106,6 @@ display:
         fields: false
         filters: false
         filter_groups: false
-        use_ajax: false
-        access: false
-        title: false
       filters:
         status:
           value: '1'
@@ -1510,10 +1313,10 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: string
-        term_node_tid_depth:
-          id: term_node_tid_depth
-          table: node_field_data
-          field: term_node_tid_depth
+        field_thesis_lab_target_id:
+          id: field_thesis_lab_target_id
+          table: node__field_thesis_lab
+          field: field_thesis_lab_target_id
           relationship: none
           group_type: group
           admin_label: ''
@@ -1522,12 +1325,12 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: term_node_tid_depth_op
-            label: 'Neuroscience Interests'
+            operator_id: field_thesis_lab_target_id_op
+            label: Adviser
             description: ''
             use_operator: false
-            operator: term_node_tid_depth_op
-            identifier: term_node_tid_depth
+            operator: field_thesis_lab_target_id_op
+            identifier: field_thesis_lab_target_id
             required: false
             remember: false
             multiple: false
@@ -1555,16 +1358,14 @@ display:
           reduce_duplicates: false
           type: select
           limit: true
-          vid: neuroscience_interests
-          hierarchy: true
+          vid: thesis_lab
+          hierarchy: false
           error_message: true
-          depth: 2
-          entity_type: node
-          plugin_id: taxonomy_index_tid_depth
-        field_thesis_lab_target_id:
-          id: field_thesis_lab_target_id
-          table: node__field_thesis_lab
-          field: field_thesis_lab_target_id
+          plugin_id: taxonomy_index_tid
+        field_candidacy__target_id:
+          id: field_candidacy__target_id
+          table: node__field_candidacy_
+          field: field_candidacy__target_id
           relationship: none
           group_type: group
           admin_label: ''
@@ -1573,12 +1374,12 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: field_thesis_lab_target_id_op
-            label: 'Thesis Adviser'
+            operator_id: field_candidacy__target_id_op
+            label: 'Candidacy Committee'
             description: ''
             use_operator: false
-            operator: field_thesis_lab_target_id_op
-            identifier: field_thesis_lab_target_id
+            operator: field_candidacy__target_id_op
+            identifier: field_candidacy__target_id
             required: false
             remember: false
             multiple: false
@@ -1659,10 +1460,10 @@ display:
           hierarchy: false
           error_message: true
           plugin_id: taxonomy_index_tid
-        field_candidacy__target_id:
-          id: field_candidacy__target_id
-          table: node__field_candidacy_
-          field: field_candidacy__target_id
+        field_neuroscience_interests_target_id:
+          id: field_neuroscience_interests_target_id
+          table: node__field_neuroscience_interests
+          field: field_neuroscience_interests_target_id
           relationship: none
           group_type: group
           admin_label: ''
@@ -1671,12 +1472,12 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: field_candidacy__target_id_op
-            label: 'Candidacy Committee'
+            operator_id: field_neuroscience_interests_target_id_op
+            label: 'Neuroscience Interests'
             description: ''
             use_operator: false
-            operator: field_candidacy__target_id_op
-            identifier: field_candidacy__target_id
+            operator: field_neuroscience_interests_target_id_op
+            identifier: field_neuroscience_interests_target_id
             required: false
             remember: false
             multiple: false
@@ -1685,7 +1486,6 @@ display:
               anonymous: '0'
               administrator: '0'
               alumni: '0'
-              deputy_admin: '0'
             reduce: false
             operator_limit_selection: false
             operator_list: {  }
@@ -1701,10 +1501,10 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          reduce_duplicates: true
+          reduce_duplicates: false
           type: select
           limit: true
-          vid: thesis_lab
+          vid: neuroscience_interests
           hierarchy: false
           error_message: true
           plugin_id: taxonomy_index_tid
@@ -1905,19 +1705,6 @@ display:
         operator: AND
         groups:
           1: AND
-      use_ajax: true
-      access:
-        type: role
-        options:
-          role:
-            administrator: administrator
-            current_student: current_student
-      tab_options:
-        type: tab
-        title: People
-        description: ''
-        weight: 0
-      title: 'Current Students'
     cache_metadata:
       max-age: -1
       contexts:
@@ -1927,994 +1714,24 @@ display:
         - url.query_args
         - user
         - 'user.node_grants:view'
-        - user.roles
+        - user.permissions
       tags:
         - 'config:field.storage.node.field_neuroscience_interests'
         - 'config:field.storage.node.field_profile_image'
   page_2:
     display_plugin: page
     id: page_2
-    display_title: 'Manage Current Students'
+    display_title: 'Manage People'
     position: 1
     display_options:
-      display_extenders:
-        views_ef_fieldset: {  }
+      display_extenders: {  }
       path: admin/neuronet/manage-people
       menu:
         type: 'default tab'
-        title: 'Manage Current Students'
+        title: 'Manage People'
         description: ''
         expanded: false
         parent: system.admin
-        weight: -5
-        context: '0'
-        menu_name: admin
-      filters:
-        status:
-          value: '1'
-          table: node_field_data
-          field: status
-          plugin_id: boolean
-          entity_type: node
-          entity_field: status
-          id: status
-          expose:
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-          group: 1
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          value:
-            profile: profile
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-          group: 1
-          expose:
-            operator_limit_selection: false
-            operator_list: {  }
-        title:
-          id: title
-          table: node_field_data
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: word
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: title_op
-            label: Name
-            description: ''
-            use_operator: false
-            operator: title_op
-            identifier: title
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              alumni: '0'
-            placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: node
-          entity_field: title
-          plugin_id: string
-        field_matriculation_year_target_id:
-          id: field_matriculation_year_target_id
-          table: node__field_matriculation_year
-          field: field_matriculation_year_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_matriculation_year_target_id_op
-            label: Year
-            description: ''
-            use_operator: false
-            operator: field_matriculation_year_target_id_op
-            identifier: field_matriculation_year_target_id
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              alumni: '0'
-              deputy_admin: '0'
-            reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: matriculation_year
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
-        roles_target_id:
-          id: roles_target_id
-          table: user__roles
-          field: roles_target_id
-          relationship: reverse__user__field_profile
-          group_type: group
-          admin_label: ''
-          operator: or
-          value:
-            current_student: current_student
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: true
-          entity_type: user
-          entity_field: roles
-          plugin_id: user_roles
-        roles_target_id_1:
-          id: roles_target_id_1
-          table: user__roles
-          field: roles_target_id
-          relationship: reverse__user__field_profile
-          group_type: group
-          admin_label: ''
-          operator: or
-          value:
-            all: all
-            administrator: administrator
-            deputy_admin: deputy_admin
-            glossary_editor: glossary_editor
-          group: 1
-          exposed: true
-          expose:
-            operator_id: roles_target_id_1_op
-            label: Role
-            description: ''
-            use_operator: false
-            operator: roles_target_id_1_op
-            identifier: roles_target_id_1
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              alumni: '0'
-              deputy_admin: '0'
-              current_student: '0'
-              glossary_editor: '0'
-            reduce: true
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: true
-          entity_type: user
-          entity_field: roles
-          plugin_id: user_roles
-        num_completed_fields:
-          id: num_completed_fields
-          table: completed_profile_fields
-          field: num_completed_fields
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '<='
-          value:
-            min: ''
-            max: ''
-            value: '6'
-          group: 1
-          exposed: true
-          expose:
-            operator_id: num_completed_fields_op
-            label: 'Incomplete Fields'
-            description: ''
-            use_operator: false
-            operator: num_completed_fields_op
-            identifier: incomplete
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              alumni: '0'
-              deputy_admin: '0'
-              current_student: '0'
-              glossary_editor: '0'
-            placeholder: ''
-            min_placeholder: ''
-            max_placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: true
-          group_info:
-            label: 'Number of Completed Fields'
-            description: ''
-            identifier: num_completed_fields
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items:
-              1:
-                title: Incomplete
-                operator: '<='
-                value:
-                  value: '6'
-                  min: ''
-                  max: ''
-              2:
-                title: 'Less than 15'
-                operator: '<'
-                value:
-                  value: '15'
-                  min: ''
-                  max: ''
-              3:
-                title: '15 or more'
-                operator: '>='
-                value:
-                  value: '15'
-                  min: ''
-                  max: ''
-          plugin_id: numeric
-      defaults:
-        filters: false
-        filter_groups: false
-        fields: false
-        style: false
-        row: false
-        title: false
-        access: false
-        header: false
-        relationships: false
-        pager: false
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      fields:
-        views_bulk_operations_bulk_form:
-          id: views_bulk_operations_bulk_form
-          table: views
-          field: views_bulk_operations_bulk_form
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: Select
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          batch: true
-          batch_size: 10
-          form_step: true
-          buttons: false
-          clear_on_exposed: true
-          action_title: Action
-          selected_actions:
-            comment_delete_action: 0
-            send_custom_email: send_custom_email
-            email_login_info: 0
-            welcome_email: 0
-            pass_reset: pass_reset
-            node_unpromote_action: 0
-            node_unpublish_action: 0
-            node_publish_action: 0
-            node_unpublish_by_keyword_action: 0
-            node_assign_owner_action: 0
-            node_promote_action: 0
-            node_save_action: 0
-            node_make_sticky_action: 0
-            node_make_unsticky_action: 0
-            views_bulk_operations_delete_entity: 0
-            pathauto_update_alias: 0
-            'entity:save_action:node': 0
-            'entity:unpublish_action:node': 0
-            'entity:publish_action:node': 0
-            'entity:delete_action:node': 0
-          preconfiguration:
-            send_custom_email:
-              label_override: ''
-            pass_reset:
-              label_override: ''
-          plugin_id: views_bulk_operations_bulk_form
-        title:
-          id: title
-          table: node_field_data
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: Name
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: false
-            ellipsis: false
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: h3
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          entity_type: node
-          entity_field: title
-          plugin_id: field
-        nid:
-          id: nid
-          table: node_field_data
-          field: nid
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: true
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: number_integer
-          settings:
-            thousand_separator: ''
-            prefix_suffix: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          entity_type: node
-          entity_field: nid
-          plugin_id: field
-        field_matriculation_year:
-          id: field_matriculation_year
-          table: node__field_matriculation_year
-          field: field_matriculation_year
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: Year
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
-          settings:
-            link: false
-          group_column: target_id
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          plugin_id: field
-        roles_target_id:
-          id: roles_target_id
-          table: user__roles
-          field: roles_target_id
-          relationship: reverse__user__field_profile
-          group_type: group
-          admin_label: ''
-          label: Roles
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          type: separator
-          separator: '<br>'
-          entity_type: user
-          entity_field: roles
-          plugin_id: user_roles
-        access:
-          id: access
-          table: users_field_data
-          field: access
-          relationship: reverse__user__field_profile
-          group_type: group
-          admin_label: ''
-          label: 'Last access'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: timestamp_ago
-          settings:
-            granularity: 2
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          entity_type: user
-          entity_field: access
-          plugin_id: field
-        num_completed_fields:
-          id: num_completed_fields
-          table: completed_profile_fields
-          field: num_completed_fields
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: 'Number of Completed Fields'
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          set_precision: false
-          precision: 0
-          decimal: .
-          separator: ','
-          format_plural: false
-          format_plural_string: !!binary MQNAY291bnQ=
-          prefix: ''
-          suffix: ''
-          plugin_id: numeric
-        operations:
-          id: operations
-          table: node
-          field: operations
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: ''
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          destination: false
-          entity_type: node
-          plugin_id: entity_operations
-      style:
-        type: table
-        options:
-          grouping: {  }
-          row_class: ''
-          default_row_class: true
-          override: true
-          sticky: false
-          caption: ''
-          summary: ''
-          description: ''
-          columns:
-            views_bulk_operations_bulk_form: views_bulk_operations_bulk_form
-            title: title
-            nid: nid
-            field_matriculation_year: field_matriculation_year
-            roles_target_id: roles_target_id
-            access: access
-            num_completed_fields: num_completed_fields
-            operations: operations
-          info:
-            views_bulk_operations_bulk_form:
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            title:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            nid:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_matriculation_year:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            roles_target_id:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            access:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            num_completed_fields:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            operations:
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-          default: title
-          empty_table: false
-      row:
-        type: fields
-        options:
-          default_field_elements: true
-          inline: {  }
-          separator: ''
-          hide_empty: false
-      title: 'Manage Current Students'
-      access:
-        type: perm
-        options:
-          perm: 'access neuronet admin'
-      display_description: ''
-      header:
-        result:
-          id: result
-          table: views
-          field: result
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          content: 'Displaying @start - @end of @total'
-          plugin_id: result
-      relationships:
-        reverse__user__field_profile:
-          id: reverse__user__field_profile
-          table: node_field_data
-          field: reverse__user__field_profile
-          relationship: none
-          group_type: group
-          admin_label: field_profile
-          required: false
-          entity_type: node
-          plugin_id: entity_reverse
-      pager:
-        type: full
-        options:
-          items_per_page: 20
-          offset: 0
-          id: 0
-          total_pages: null
-          tags:
-            previous: ‹‹
-            next: ››
-            first: '« First'
-            last: 'Last »'
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-          quantity: 5
-      tab_options:
-        type: normal
-        title: 'NeuroNet Admin'
-        description: ''
-        weight: 0
-    cache_metadata:
-      max-age: 0
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - url.query_args
-        - user
-        - 'user.node_grants:view'
-        - user.permissions
-      tags:
-        - 'config:field.storage.node.field_matriculation_year'
-  page_3:
-    display_plugin: page
-    id: page_3
-    display_title: 'Manage Alumni'
-    position: 1
-    display_options:
-      display_extenders:
-        views_ef_fieldset: {  }
-      path: admin/neuronet/manage-alumni
-      menu:
-        type: tab
-        title: 'Manage Alumni'
-        description: ''
-        expanded: false
-        parent: view.current_students.page_2
         weight: -5
         context: '0'
         menu_name: admin
@@ -2952,7 +1769,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          operator: 'not empty'
+          operator: empty
           value: {  }
           group: 1
           exposed: false
@@ -3034,10 +1851,10 @@ display:
           entity_type: node
           entity_field: title
           plugin_id: string
-        field_exit_term_target_id_1:
-          id: field_exit_term_target_id_1
-          table: node__field_exit_term
-          field: field_exit_term_target_id
+        field_matriculation_year_target_id:
+          id: field_matriculation_year_target_id
+          table: node__field_matriculation_year
+          field: field_matriculation_year_target_id
           relationship: none
           group_type: group
           admin_label: ''
@@ -3046,12 +1863,12 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: field_exit_term_target_id_1_op
-            label: 'Exit Term'
+            operator_id: field_matriculation_year_target_id_op
+            label: Year
             description: ''
             use_operator: false
-            operator: field_exit_term_target_id_1_op
-            identifier: field_exit_term_target_id_1
+            operator: field_matriculation_year_target_id_op
+            identifier: field_matriculation_year_target_id
             required: false
             remember: false
             multiple: false
@@ -3061,8 +1878,6 @@ display:
               administrator: '0'
               alumni: '0'
               deputy_admin: '0'
-              current_student: '0'
-              glossary_editor: '0'
             reduce: false
             operator_limit_selection: false
             operator_list: {  }
@@ -3081,116 +1896,10 @@ display:
           reduce_duplicates: false
           type: select
           limit: true
-          vid: academic_term
+          vid: matriculation_year
           hierarchy: false
           error_message: true
           plugin_id: taxonomy_index_tid
-        mail:
-          id: mail
-          table: users_field_data
-          field: mail
-          relationship: reverse__user__field_profile
-          group_type: group
-          admin_label: ''
-          operator: 'not empty'
-          value: ''
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: user
-          entity_field: mail
-          plugin_id: string
-        num_completed_fields:
-          id: num_completed_fields
-          table: completed_profile_fields
-          field: num_completed_fields
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: '='
-          value:
-            min: ''
-            max: ''
-            value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: num_completed_fields_op
-            label: 'Number of Completed Fields'
-            description: null
-            use_operator: false
-            operator: num_completed_fields_op
-            identifier: num_completed_fields
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            placeholder: null
-            min_placeholder: null
-            max_placeholder: null
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: true
-          group_info:
-            label: 'Completed Fields'
-            description: ''
-            identifier: num_completed_fields
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items:
-              1:
-                title: Incomplete
-                operator: '<'
-                value:
-                  value: '7'
-                  min: ''
-                  max: ''
-              2:
-                title: 'Less than 15'
-                operator: '<'
-                value:
-                  value: '15'
-                  min: ''
-                  max: ''
-              3:
-                title: '15 or more'
-                operator: '>='
-                value:
-                  value: '15'
-                  min: ''
-                  max: ''
-          plugin_id: numeric
       defaults:
         filters: false
         filter_groups: false
@@ -3207,87 +1916,6 @@ display:
         groups:
           1: AND
       fields:
-        views_bulk_operations_bulk_form:
-          id: views_bulk_operations_bulk_form
-          table: views
-          field: views_bulk_operations_bulk_form
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: Select
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: true
-            ellipsis: true
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: true
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          batch: true
-          batch_size: 10
-          form_step: true
-          buttons: false
-          clear_on_exposed: false
-          action_title: Action
-          selected_actions:
-            comment_delete_action: 0
-            send_custom_email: send_custom_email
-            email_login_info: 0
-            welcome_email: 0
-            pass_reset: pass_reset
-            node_unpromote_action: 0
-            node_unpublish_action: 0
-            node_publish_action: 0
-            node_unpublish_by_keyword_action: 0
-            node_assign_owner_action: 0
-            node_promote_action: 0
-            node_save_action: 0
-            node_make_sticky_action: 0
-            node_make_unsticky_action: 0
-            views_bulk_operations_delete_entity: 0
-            pathauto_update_alias: 0
-            'entity:save_action:node': 0
-            'entity:unpublish_action:node': 0
-            'entity:publish_action:node': 0
-            'entity:delete_action:node': 0
-          preconfiguration:
-            send_custom_email:
-              label_override: ''
-            pass_reset:
-              label_override: ''
-          plugin_id: views_bulk_operations_bulk_form
         title:
           id: title
           table: node_field_data
@@ -3419,14 +2047,63 @@ display:
           entity_type: node
           entity_field: nid
           plugin_id: field
-        field_exit_term:
-          id: field_exit_term
-          table: node__field_exit_term
-          field: field_exit_term
+        nothing:
+          id: nothing
+          table: views
+          field: nothing
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Exit Term'
+          label: 'Email Login Link'
+          exclude: true
+          alter:
+            alter_text: true
+            text: '<img src="/modules/custom/neuronet_misc/img/mail-512.png">'
+            make_link: true
+            path: '/email-login-link-single/{{ nid }}'
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: are-you-sure
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: false
+          plugin_id: custom
+        field_matriculation_year:
+          id: field_matriculation_year
+          table: node__field_matriculation_year
+          field: field_matriculation_year
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Year
           exclude: false
           alter:
             alter_text: false
@@ -3459,7 +2136,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: true
+          element_label_colon: false
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -3547,14 +2224,14 @@ display:
           entity_type: user
           entity_field: access
           plugin_id: field
-        num_completed_fields:
-          id: num_completed_fields
-          table: completed_profile_fields
-          field: num_completed_fields
+        node_count_completed_fields:
+          id: node_count_completed_fields
+          table: node
+          field: node_count_completed_fields
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Completed Fields'
+          label: '# of Completed Fields'
           exclude: false
           alter:
             alter_text: false
@@ -3595,23 +2272,16 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          set_precision: false
-          precision: 0
-          decimal: .
-          separator: ','
-          format_plural: false
-          format_plural_string: !!binary MQNAY291bnQ=
-          prefix: ''
-          suffix: ''
-          plugin_id: numeric
-        operations:
-          id: operations
-          table: node
-          field: operations
+          entity_type: node
+          plugin_id: node_count_completed_fields
+        views_bulk_operations_bulk_form:
+          id: views_bulk_operations_bulk_form
+          table: views
+          field: views_bulk_operations_bulk_form
           relationship: none
           group_type: group
           admin_label: ''
-          label: ''
+          label: Select
           exclude: false
           alter:
             alter_text: false
@@ -3644,7 +2314,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -3652,9 +2322,38 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          destination: false
-          entity_type: node
-          plugin_id: entity_operations
+          batch: true
+          batch_size: 10
+          form_step: true
+          buttons: false
+          clear_on_exposed: false
+          action_title: Action
+          selected_actions:
+            email_login_info: email_login_info
+            pass_reset: pass_reset
+            welcome_email: welcome_email
+            node_assign_owner_action: 0
+            node_unpromote_action: 0
+            node_promote_action: 0
+            node_publish_action: 0
+            node_save_action: 0
+            node_make_sticky_action: 0
+            node_unpublish_by_keyword_action: 0
+            node_unpublish_action: 0
+            node_make_unsticky_action: 0
+            views_bulk_operations_delete_entity: 0
+            pathauto_update_alias: 0
+            'entity:publish_action:node': 0
+            'entity:save_action:node': 0
+            'entity:unpublish_action:node': 0
+          preconfiguration:
+            email_login_info:
+              label_override: 'Send special welcome to beta testers'
+            pass_reset:
+              label_override: ''
+            welcome_email:
+              label_override: 'Send Welcome Email'
+          plugin_id: views_bulk_operations_bulk_form
       style:
         type: table
         options:
@@ -3731,7 +2430,7 @@ display:
           inline: {  }
           separator: ''
           hide_empty: false
-      title: 'Manage Alumni'
+      title: 'Manage People'
       access:
         type: perm
         options:
@@ -3796,414 +2495,4 @@ display:
         - 'user.node_grants:view'
         - user.permissions
       tags:
-        - 'config:field.storage.node.field_exit_term'
-  page_4:
-    display_plugin: page
-    id: page_4
-    display_title: 'Alumni - Current Students'
-    position: 1
-    display_options:
-      display_extenders:
-        views_ef_fieldset: {  }
-      path: a-people/students
-      menu:
-        type: tab
-        title: 'Current Students'
-        description: ''
-        expanded: false
-        parent: ''
-        weight: 0
-        context: '0'
-        menu_name: main
-      filters:
-        status:
-          value: '1'
-          table: node_field_data
-          field: status
-          plugin_id: boolean
-          entity_type: node
-          entity_field: status
-          id: status
-          expose:
-            operator: ''
-            operator_limit_selection: false
-            operator_list: {  }
-          group: 1
-        type:
-          id: type
-          table: node_field_data
-          field: type
-          value:
-            profile: profile
-          entity_type: node
-          entity_field: type
-          plugin_id: bundle
-          group: 1
-          expose:
-            operator_limit_selection: false
-            operator_list: {  }
-        title:
-          id: title
-          table: node_field_data
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: word
-          value: ''
-          group: 1
-          exposed: true
-          expose:
-            operator_id: title_op
-            label: Name
-            description: ''
-            use_operator: false
-            operator: title_op
-            identifier: title
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              alumni: '0'
-            placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          entity_type: node
-          entity_field: title
-          plugin_id: string
-        field_matriculation_year_target_id:
-          id: field_matriculation_year_target_id
-          table: node__field_matriculation_year
-          field: field_matriculation_year_target_id
-          relationship: none
-          group_type: group
-          admin_label: ''
-          operator: or
-          value: {  }
-          group: 1
-          exposed: true
-          expose:
-            operator_id: field_matriculation_year_target_id_op
-            label: Year
-            description: ''
-            use_operator: false
-            operator: field_matriculation_year_target_id_op
-            identifier: field_matriculation_year_target_id
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-              alumni: '0'
-              deputy_admin: '0'
-            reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          type: select
-          limit: true
-          vid: matriculation_year
-          hierarchy: false
-          error_message: true
-          plugin_id: taxonomy_index_tid
-        roles_target_id:
-          id: roles_target_id
-          table: user__roles
-          field: roles_target_id
-          relationship: reverse__user__field_profile
-          group_type: group
-          admin_label: ''
-          operator: or
-          value:
-            current_student: current_student
-          group: 1
-          exposed: false
-          expose:
-            operator_id: ''
-            label: ''
-            description: ''
-            use_operator: false
-            operator: ''
-            identifier: ''
-            required: false
-            remember: false
-            multiple: false
-            remember_roles:
-              authenticated: authenticated
-            reduce: false
-            operator_limit_selection: false
-            operator_list: {  }
-          is_grouped: false
-          group_info:
-            label: ''
-            description: ''
-            identifier: ''
-            optional: true
-            widget: select
-            multiple: false
-            remember: false
-            default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
-          reduce_duplicates: false
-          entity_type: user
-          entity_field: roles
-          plugin_id: user_roles
-      defaults:
-        filters: false
-        filter_groups: false
-        fields: false
-        style: false
-        row: false
-        title: false
-        access: false
-        header: false
-        relationships: false
-        pager: false
-      filter_groups:
-        operator: AND
-        groups:
-          1: AND
-      fields:
-        title:
-          id: title
-          table: node_field_data
-          field: title
-          relationship: none
-          group_type: group
-          admin_label: ''
-          label: Name
-          exclude: false
-          alter:
-            alter_text: false
-            text: ''
-            make_link: false
-            path: ''
-            absolute: false
-            external: false
-            replace_spaces: false
-            path_case: none
-            trim_whitespace: false
-            alt: ''
-            rel: ''
-            link_class: ''
-            prefix: ''
-            suffix: ''
-            target: ''
-            nl2br: false
-            max_length: 0
-            word_boundary: false
-            ellipsis: false
-            more_link: false
-            more_link_text: ''
-            more_link_path: ''
-            strip_tags: false
-            trim: false
-            preserve_tags: ''
-            html: false
-          element_type: ''
-          element_class: ''
-          element_label_type: ''
-          element_label_class: ''
-          element_label_colon: false
-          element_wrapper_type: ''
-          element_wrapper_class: ''
-          element_default_classes: true
-          empty: ''
-          hide_empty: false
-          empty_zero: false
-          hide_alter_empty: true
-          click_sort_column: value
-          type: string
-          settings:
-            link_to_entity: true
-          group_column: value
-          group_columns: {  }
-          group_rows: true
-          delta_limit: 0
-          delta_offset: 0
-          delta_reversed: false
-          delta_first_last: false
-          multi_type: separator
-          separator: ', '
-          field_api_classes: false
-          entity_type: node
-          entity_field: title
-          plugin_id: field
-      style:
-        type: table
-        options:
-          grouping: {  }
-          row_class: ''
-          default_row_class: true
-          override: true
-          sticky: false
-          caption: ''
-          summary: ''
-          description: ''
-          columns:
-            views_bulk_operations_bulk_form: views_bulk_operations_bulk_form
-            title: title
-            nid: nid
-            field_matriculation_year: field_matriculation_year
-            roles_target_id: roles_target_id
-            access: access
-            num_completed_fields: num_completed_fields
-            operations: operations
-          info:
-            views_bulk_operations_bulk_form:
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            title:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            nid:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            field_matriculation_year:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            roles_target_id:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            access:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            num_completed_fields:
-              sortable: true
-              default_sort_order: asc
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-            operations:
-              align: ''
-              separator: ''
-              empty_column: false
-              responsive: ''
-          default: title
-          empty_table: false
-      row:
-        type: fields
-        options:
-          default_field_elements: true
-          inline: {  }
-          separator: ''
-          hide_empty: false
-      title: 'Current Students'
-      access:
-        type: role
-        options:
-          role:
-            alumni: alumni
-      display_description: ''
-      header:
-        result:
-          id: result
-          table: views
-          field: result
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          content: 'Displaying @start - @end of @total'
-          plugin_id: result
-      relationships:
-        reverse__user__field_profile:
-          id: reverse__user__field_profile
-          table: node_field_data
-          field: reverse__user__field_profile
-          relationship: none
-          group_type: group
-          admin_label: field_profile
-          required: false
-          entity_type: node
-          plugin_id: entity_reverse
-      pager:
-        type: full
-        options:
-          items_per_page: 20
-          offset: 0
-          id: 0
-          total_pages: null
-          tags:
-            previous: ‹‹
-            next: ››
-            first: '« First'
-            last: 'Last »'
-          expose:
-            items_per_page: false
-            items_per_page_label: 'Items per page'
-            items_per_page_options: '5, 10, 25, 50'
-            items_per_page_options_all: false
-            items_per_page_options_all_label: '- All -'
-            offset: false
-            offset_label: Offset
-          quantity: 5
-      tab_options:
-        type: normal
-        title: 'NeuroNet Admin'
-        description: ''
-        weight: 0
-    cache_metadata:
-      max-age: -1
-      contexts:
-        - 'languages:language_content'
-        - 'languages:language_interface'
-        - url
-        - url.query_args
-        - user
-        - 'user.node_grants:view'
-        - user.roles
-      tags: {  }
+        - 'config:field.storage.node.field_matriculation_year'

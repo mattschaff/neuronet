@@ -1,21 +1,20 @@
-uuid: d51dd14d-507b-456b-aef1-0642024eee59
+uuid: 406e9e60-11c0-4288-94f2-5af5e5d09d8e
 langcode: en
 status: true
 dependencies:
   config:
-    - taxonomy.vocabulary.glossary
+    - field.storage.node.field_thesis_lab
+    - node.type.profile
   module:
-    - taxonomy
+    - node
     - user
-_core:
-  default_config_hash: JfoX_A5P-2BGPlWJNPCrSYScfe2T5-GDNKPyJMk8GQw
-id: administer_glossary
-label: 'Administer Glossary'
+id: test_view
+label: 'Test View'
 module: views
 description: ''
 tag: ''
-base_table: taxonomy_term_field_data
-base_field: tid
+base_table: node_field_data
+base_field: nid
 display:
   default:
     display_plugin: default
@@ -26,7 +25,7 @@ display:
       access:
         type: perm
         options:
-          perm: 'access glia admin'
+          perm: 'access content'
       cache:
         type: tag
         options: {  }
@@ -49,12 +48,17 @@ display:
           sort_asc_label: Asc
           sort_desc_label: Desc
       pager:
-        type: mini
+        type: full
         options:
-          items_per_page: 20
+          items_per_page: 10
           offset: 0
           id: 0
           total_pages: null
+          tags:
+            previous: ‹‹
+            next: ››
+            first: '« First'
+            last: 'Last »'
           expose:
             items_per_page: false
             items_per_page_label: 'Items per page'
@@ -63,20 +67,18 @@ display:
             items_per_page_options_all_label: '- All -'
             offset: false
             offset_label: Offset
-          tags:
-            previous: ‹‹
-            next: ››
+          quantity: 9
       style:
         type: table
       row:
         type: fields
       fields:
-        name:
-          id: name
-          table: taxonomy_term_field_data
-          field: name
-          entity_type: taxonomy_term
-          entity_field: name
+        title:
+          id: title
+          table: node_field_data
+          field: title
+          entity_type: node
+          entity_field: title
           alter:
             alter_text: false
             make_link: false
@@ -88,14 +90,13 @@ display:
             html: false
           hide_empty: false
           empty_zero: false
-          type: string
           settings:
             link_to_entity: true
-          plugin_id: term_name
+          plugin_id: field
           relationship: none
           group_type: group
           admin_label: ''
-          label: Name
+          label: Title
           exclude: false
           element_type: ''
           element_class: ''
@@ -108,6 +109,7 @@ display:
           empty: ''
           hide_alter_empty: true
           click_sort_column: value
+          type: string
           group_column: value
           group_columns: {  }
           group_rows: true
@@ -118,15 +120,14 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          convert_spaces: false
-        operations:
-          id: operations
-          table: taxonomy_term_data
-          field: operations
+        field_thesis_lab:
+          id: field_thesis_lab
+          table: node__field_thesis_lab
+          field: field_thesis_lab
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Operations links'
+          label: 'Thesis Adviser(s)'
           exclude: false
           alter:
             alter_text: false
@@ -167,16 +168,79 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          destination: true
-          entity_type: taxonomy_term
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: false
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          plugin_id: field
+        operations:
+          id: operations
+          table: node
+          field: operations
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Ethan''s Title'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          destination: false
+          entity_type: node
           plugin_id: entity_operations
       filters:
         status:
           value: '1'
-          table: taxonomy_term_field_data
+          table: node_field_data
           field: status
           plugin_id: boolean
-          entity_type: taxonomy_term
+          entity_type: node
           entity_field: status
           id: status
           expose:
@@ -184,46 +248,43 @@ display:
             operator_limit_selection: false
             operator_list: {  }
           group: 1
-        vid:
-          id: vid
-          table: taxonomy_term_field_data
-          field: vid
+        type:
+          id: type
+          table: node_field_data
+          field: type
           value:
-            glossary: glossary
-          entity_type: taxonomy_term
-          entity_field: vid
+            profile: profile
+          entity_type: node
+          entity_field: type
           plugin_id: bundle
           expose:
             operator_limit_selection: false
             operator_list: {  }
-        name:
-          id: name
-          table: taxonomy_term_field_data
-          field: name
+        field_alumni_value:
+          id: field_alumni_value
+          table: node__field_alumni
+          field: field_alumni_value
           relationship: none
           group_type: group
           admin_label: ''
-          operator: contains
-          value: ''
+          operator: '='
+          value: '0'
           group: 1
-          exposed: true
+          exposed: false
           expose:
-            operator_id: name_op
-            label: 'Search term'
+            operator_id: ''
+            label: ''
             description: ''
             use_operator: false
-            operator: name_op
-            identifier: name
+            operator: ''
+            operator_limit_selection: false
+            operator_list: {  }
+            identifier: ''
             required: false
             remember: false
             multiple: false
             remember_roles:
               authenticated: authenticated
-              anonymous: '0'
-              administrator: '0'
-            placeholder: ''
-            operator_limit_selection: false
-            operator_list: {  }
           is_grouped: false
           group_info:
             label: ''
@@ -236,14 +297,12 @@ display:
             default_group: All
             default_group_multiple: {  }
             group_items: {  }
-          entity_type: taxonomy_term
-          entity_field: name
-          plugin_id: string
+          plugin_id: boolean
       sorts:
-        name:
-          id: name
-          table: taxonomy_term_field_data
-          field: name
+        field_first_name_value:
+          id: field_first_name_value
+          table: node__field_first_name
+          field: field_first_name_value
           relationship: none
           group_type: group
           admin_label: ''
@@ -251,10 +310,8 @@ display:
           exposed: false
           expose:
             label: ''
-          entity_type: taxonomy_term
-          entity_field: name
           plugin_id: standard
-      title: 'Administer Glossary'
+      title: 'Test View'
       header:
         result:
           id: result
@@ -266,62 +323,37 @@ display:
           empty: false
           content: 'Displaying @start - @end of @total'
           plugin_id: result
-        area:
-          id: area
-          table: views
-          field: area
-          relationship: none
-          group_type: group
-          admin_label: ''
-          empty: false
-          tokenize: true
-          content:
-            value: '<br><br><a id="add-glossary-term" style="margin-left: 0px;" class="button button--primary" href="{{ url(''<front>'')}}admin/structure/taxonomy/manage/glossary/add?destination=/neuronet/admin/glia">Add Glossary Term</a>'
-            format: full_html
-          plugin_id: text
       footer: {  }
       empty: {  }
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
-      use_ajax: true
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url
         - url.query_args
+        - 'user.node_grants:view'
         - user.permissions
-      tags: {  }
+      tags:
+        - 'config:field.storage.node.field_thesis_lab'
   page_1:
     display_plugin: page
     id: page_1
     display_title: Page
     position: 1
     display_options:
-      display_extenders: {  }
-      path: admin/glia/administer-glossary
-      menu:
-        type: 'default tab'
-        title: 'Administer Glossary'
-        description: ''
-        expanded: false
-        parent: view.administer_glossary.page_1
-        weight: -10
-        context: '0'
-        menu_name: admin
-      tab_options:
-        type: normal
-        title: 'GLIA Admin'
-        description: ''
-        weight: 0
+      display_extenders:
+        views_ef_fieldset: {  }
+      path: test-view
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
-        - url
         - url.query_args
+        - 'user.node_grants:view'
         - user.permissions
-      tags: {  }
+      tags:
+        - 'config:field.storage.node.field_thesis_lab'
