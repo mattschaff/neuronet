@@ -108,6 +108,8 @@ server_code=$(cat << EOF
     git fetch $remote &&
     git checkout -f $remote/$branch &&
     git reset --hard &&
+    git branch -f $branch &&
+    git checkout $branch &&
 
     echo &&
     echo Running composer install... &&

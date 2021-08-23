@@ -89,6 +89,8 @@ server_code=$(cat << EOF
 	git fetch dev &&
 	git checkout -f dev/$branch &&
 	git reset --hard &&
+	git branch -f $branch &&
+	git checkout $branch &&
 
 	echo &&
 	echo Running composer install... &&
