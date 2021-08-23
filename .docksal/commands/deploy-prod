@@ -124,12 +124,12 @@ server_code=$(cat << EOF
     trap cleanup EXIT &&
 
     echo &&
-    echo Updating prod database... &&
-    drush updb -y &&
-
-    echo &&
     echo Importing config on prod site... &&
     drush cim -y &&
+
+    echo &&
+    echo Updating prod database... &&
+    drush updb -y &&
 
     echo Cache-rebuilding... &&
     drush cr &&
