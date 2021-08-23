@@ -89,6 +89,8 @@ server_code=$(cat << EOF
 	git fetch dev &&
 	git checkout -f dev/$branch &&
 	git reset --hard &&
+	git branch -f $branch &&
+	git checkout $branch &&
 
 	echo &&
 	echo Running composer install... &&
@@ -100,15 +102,15 @@ server_code=$(cat << EOF
 		drush sql-query --file=$test_dump;
 	} &&
 	trap cleanup EXIT &&
+	
+	echo &&
+	echo Importing config files... &&
+	drush cim -y &&
 
 	echo &&
 	echo Updating database... &&
 	cd - &&
 	drush updb -y &&
-
-	echo &&
-	echo Importing config files... &&
-	drush cim -y &&
 
 	echo &&
 	echo Cache-rebuilding... &&
