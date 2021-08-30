@@ -74,3 +74,6 @@ docksal-local.yml
 # Site-specific .htaccess settings #
 #################################
 /assets/site-addons.htaccess
+
+# Ignore manually cloned module to avoid making submodule #
+/web/modules/contrib/views_distinct
