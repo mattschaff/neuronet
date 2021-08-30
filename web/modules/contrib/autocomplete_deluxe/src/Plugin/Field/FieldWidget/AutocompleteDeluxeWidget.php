@@ -9,6 +9,7 @@ use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Field\WidgetBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Site\Settings;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
@@ -16,7 +17,6 @@ use Drupal\Core\Url;
 use Drupal\user\EntityOwnerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\KeyValueStore\KeyValueFactory;
 
 /**
  * Plugin implementation of the 'options_buttons' widget.
@@ -51,7 +51,7 @@ class AutocompleteDeluxeWidget extends WidgetBase implements ContainerFactoryPlu
   /**
    * Key value service.
    *
-   * @var \Drupal\Core\KeyValueStore\KeyValueFactory
+   * @var \Drupal\Core\KeyValueStore\KeyValueFactoryInterface
    */
   protected $keyValue;
 
@@ -72,10 +72,10 @@ class AutocompleteDeluxeWidget extends WidgetBase implements ContainerFactoryPlu
    *   The module handler.
    * @param \Drupal\Core\Session\AccountInterface $account
    *   Current account.
-   * @param \Drupal\Core\KeyValueStore\KeyValueFactory $key_value
+   * @param \Drupal\Core\KeyValueStore\KeyValueFactoryInterface $key_value
    *   Key value storage.
    */
-  public function __construct($plugin_id, $plugin_definition, FieldDefinitionInterface $field_definition, array $settings, array $third_party_settings, ModuleHandlerInterface $module_handler, AccountInterface $account, KeyValueFactory $key_value) {
+  public function __construct($plugin_id, $plugin_definition, FieldDefinitionInterface $field_definition, array $settings, array $third_party_settings, ModuleHandlerInterface $module_handler, AccountInterface $account, KeyValueFactoryInterface $key_value) {
     parent::__construct($plugin_id, $plugin_definition, $field_definition, $settings, $third_party_settings);
 
     $this->moduleHandler = $module_handler;
@@ -122,6 +122,13 @@ class AutocompleteDeluxeWidget extends WidgetBase implements ContainerFactoryPlu
    * {@inheritdoc}
    */
   public function settingsForm(array $form, FormStateInterface $form_state) {
+    $element['match_operator'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Match operator'),
+      '#description' => $this->t('Specify the matcting operator.'),
+      '#default_value' => $this->getSetting('match_operator'),
+      '#options' => $this->getMatchOperatorOptions(),
+    ];
     $element['limit'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Limit of the output.'),
@@ -177,6 +184,7 @@ class AutocompleteDeluxeWidget extends WidgetBase implements ContainerFactoryPlu
   public function settingsSummary() {
     $summary = [];
 
+    $summary[] = $this->t('Match operator: @match_operator', ['@match_operator' => $this->getSetting('match_operator')]);
     $summary[] = $this->t('Limit: @limit', ['@limit' => $this->getSetting('limit')]);
     $summary[] = $this->t('Min length: @min_length', ['@min_length' => $this->getSetting('min_length')]);
     $summary[] = $this->t('Delimiter: @delimiter', ['@delimiter' => $this->getSetting('delimiter')]);
@@ -203,7 +211,6 @@ class AutocompleteDeluxeWidget extends WidgetBase implements ContainerFactoryPlu
 
     $allow_message = $settings['not_found_message_allow'] ?? FALSE;
     $not_found_message = $settings['not_found_message'] ?? "";
-
 
     $element += [
       '#type' => 'autocomplete_deluxe',
