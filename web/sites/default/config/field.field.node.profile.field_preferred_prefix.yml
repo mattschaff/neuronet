@@ -9,8 +9,8 @@ id: node.profile.field_preferred_prefix
 field_name: field_preferred_prefix
 entity_type: node
 bundle: profile
-label: 'Preferred Name'
-description: 'e.g. Dr. Smith, or John'
+label: 'Preferred First Name'
+description: ''
 required: false
 translatable: false
 default_value: {  }

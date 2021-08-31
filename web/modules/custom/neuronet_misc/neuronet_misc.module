@@ -520,3 +520,22 @@ function neuronet_misc_theme($existing, $type, $theme, $path) {
     ]
   ];
 }
+
+/**
+ * Implements hook_auto_entitylabel_label_alter()
+ */
+function neuronet_misc_auto_entitylabel_label_alter(&$label, EntityInterface $entity) {
+  // Only change for profile nodes
+  if ($entity->bundle() != 'profile') {
+    return;
+  }
+
+  /** @var NodeInterface $profile */
+  $profile = $entity;
+  // Only change if the preferred name field is non-empty
+  $pref_name = $profile->get('field_preferred_prefix')->getString();
+  if ($pref_name != NULL) {
+    $name = $profile->get('field_first_name')->getString();
+    $label = preg_replace('/' . preg_quote($name, '/') . '/', $pref_name, $label, 1);
+  }
+}
