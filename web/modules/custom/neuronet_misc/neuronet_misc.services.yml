@@ -21,3 +21,5 @@ services:
     arguments:
       - '@tempstore.private'
       - '@entity_type.manager'
+  neuronet_misc.refresh_fields:
+    class: Drupal\neuronet_misc\Service\RefreshFields

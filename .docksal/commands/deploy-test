@@ -102,6 +102,10 @@ server_code=$(cat << EOF
 		drush sql-query --file=$test_dump;
 	} &&
 	trap cleanup EXIT &&
+
+	echo &&
+	echo Cache-rebuilding... &&
+	drush cr &&
 	
 	echo &&
 	echo Importing config files... &&

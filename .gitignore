@@ -75,5 +75,6 @@ docksal-local.yml
 #################################
 /assets/site-addons.htaccess
 
-# Ignore manually cloned module to avoid making submodule #
+# Ignore manually cloned modules to avoid making submodule #
 /web/modules/contrib/views_distinct
+/web/modules/contrib/computed_field

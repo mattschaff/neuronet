@@ -13,19 +13,21 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
-use \Drupal\user\Entity\User;
+use Drupal\user\UserInterface;
+use Drupal\user\Entity\User;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Entity\EntityInterface;
-use \Drupal\Core\Session\AccountInterface;
-use \Drupal\node\NodeInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\node\NodeInterface;
 use Drupal\Core\Access\AccessResultAllowed;
 use Drupal\Core\Access\AccessResultForbidden;
 use Drupal\Core\Asset\AttachedAssetsInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
-use \Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\TrustedRedirectResponse;
 
 use Drupal\neuronet_misc\Service\CompletedFields;
+use Drupal\node\Entity\Node;
 
 require_once __DIR__ . '/inc/helpers.php';
 
@@ -292,15 +294,22 @@ function neuronet_misc_mail($key, &$message, $params) {
   // Make sure all emails use HTML Headers. Allows for sleek, rich text emails.
   $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
   // Set values for a custom email created by NeuroNet managers.
+
   if ($key == 'custom') {
+    /** @var NodeInterface $profile */
+    $profile = $params['profile'];
+
     // Replace first name.
+    $firstname = $profile->get('field_preferred_first_name_comp')->value;
+    $lastname = $profile->get('field_last_name')->value;
+
     $subject = $params['subject'];
     $body = $params['body'];
-    $subject = preg_replace('/(%%%FIRSTNAME%%%)/i', $params['profile']->get('field_first_name')->value, $subject);
-    $body = preg_replace('/(%%%FIRSTNAME%%%)/i', $params['profile']->get('field_first_name')->value, $body);
+    $subject = preg_replace('/(%%%FIRSTNAME%%%)/i', $firstname, $subject);
+    $body = preg_replace('/(%%%FIRSTNAME%%%)/i', $firstname, $body);
     // Replace last name.
-    $subject = preg_replace('/(%%%LASTNAME%%%)/i', $params['profile']->get('field_last_name')->value, $subject);
-    $body = preg_replace('/(%%%LASTNAME%%%)/i', $params['profile']->get('field_last_name')->value, $body);
+    $subject = preg_replace('/(%%%LASTNAME%%%)/i', $lastname, $subject);
+    $body = preg_replace('/(%%%LASTNAME%%%)/i', $lastname, $body);
     // Replace login link.
     if ($params['user']->id() != 1) {
       $login_url = user_pass_reset_url($params['user']);
@@ -332,10 +341,11 @@ function neuronet_misc_entity_update(EntityInterface $entity) {
   if ($entity->getEntityTypeId() == 'user') {
     $user = User::load($entity->id());
     $connection = \Drupal::database();
-      $query = $connection->query("SELECT field_profile_target_id FROM {user__field_profile} WHERE entity_id = :entity_id", [':entity_id' => $entity->id()]);
-      $result = $query->fetchAll();
+    $query = $connection->query("SELECT field_profile_target_id FROM {user__field_profile} WHERE entity_id = :entity_id", [':entity_id' => $entity->id()]);
+    $result = $query->fetchAll();
     if (!empty($result)) {
       $nid = $result[0]->field_profile_target_id;
+      /** @var NodeInterface $node */
       if ($node = \Drupal::entityTypeManager()->getStorage('node')->load($nid)) {
         $new_email = $user->getEmail();
         $node->set('field_email', $new_email);
@@ -390,14 +400,15 @@ function neuronet_misc_node_insert($node) {
 /**
  * Implements hook_node_update()
  */
-function neuronet_misc_node_update(EntityInterface $node) {
+function neuronet_misc_node_update(NodeInterface $node) {
   _neuronet_misc_set_job_posting_temp_store($node);
   // Add alumni role to users associated w/ profiles set to alumni.
   // Remove alumni role from users associated w/ profiles not set to alumni.
-  if ($node->getType() == 'profile') {
+  if ($node->bundle() == 'profile') {
     $users = \Drupal::entityTypeManager()->getStorage('user')->loadByProperties([
       'field_profile' => $node->id(),
     ]);
+    /** @var UserInterface $user */
     if ($user = reset($users)) {
       if ($node->get('field_alumni')->value && !$user->hasRole('alumni')) {
         $user->addRole('alumni');
@@ -522,20 +533,14 @@ function neuronet_misc_theme($existing, $type, $theme, $path) {
 }
 
 /**
- * Implements hook_auto_entitylabel_label_alter()
+ * Compute first name to use, either "preferred name" or first name
  */
-function neuronet_misc_auto_entitylabel_label_alter(&$label, EntityInterface $entity) {
-  // Only change for profile nodes
-  if ($entity->bundle() != 'profile') {
-    return;
+function computed_field_field_preferred_first_name_comp_compute(
+  $entity_type_manager, NodeInterface $entity, $fields, $delta) {
+    $pref_name = $entity->get('field_preferred_prefix')->getString();
+    if ($pref_name != NULL) {
+      return $pref_name;
+    } else {
+      return $entity->get('field_first_name')->getString();
+    }
   }
-
-  /** @var NodeInterface $profile */
-  $profile = $entity;
-  // Only change if the preferred name field is non-empty
-  $pref_name = $profile->get('field_preferred_prefix')->getString();
-  if ($pref_name != NULL) {
-    $name = $profile->get('field_first_name')->getString();
-    $label = preg_replace('/' . preg_quote($name, '/') . '/', $pref_name, $label, 1);
-  }
-}

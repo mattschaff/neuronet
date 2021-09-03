@@ -30,6 +30,7 @@ dependencies:
     - field.field.node.profile.field_neuroscience_interests
     - field.field.node.profile.field_ngg_activities
     - field.field.node.profile.field_non_ngg_activities
+    - field.field.node.profile.field_preferred_first_name_comp
     - field.field.node.profile.field_preferred_prefix
     - field.field.node.profile.field_preferred_pronouns
     - field.field.node.profile.field_profile_image
@@ -41,6 +42,7 @@ dependencies:
     - field.field.node.profile.field_undergraduate_major
     - node.type.profile
   module:
+    - computed_field
     - ds
     - user
 third_party_settings:
@@ -95,6 +97,16 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_preferred_first_name_comp:
+    weight: 5
+    label: above
+    settings:
+      sanitized: true
+      cache_unit: -1
+      cache_duration: 1
+    third_party_settings: {  }
+    type: computed_string
     region: content
   field_preferred_pronouns:
     weight: 4
