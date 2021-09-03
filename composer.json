@@ -37,6 +37,7 @@
         "drupal/autocomplete_deluxe": "~2.0",
         "drupal/bootstrap": "~3.0",
         "drupal/bootstrap_layouts": "~5.0",
+        "drupal/computed_field": "~3.0",
         "drupal/conditional_fields": "~4.0",
         "drupal/config_update": "~1.0",
         "drupal/core-composer-scaffold": "^8.8",

@@ -222,7 +222,7 @@ function neuronet_misc_update_8003() {
  */
 function neuronet_misc_update_8005(&$sandbox) {
   $entity_batch_update = \Drupal::service('neuronet_misc.entity_batch_update');
-  // Get & configure entity query for profiles.
+  // Get & configure entity query for jobs.
   $query = $entity_batch_update->getEntityQuery('node');
   $query = $query->condition('type', 'job');
   // Set node-wise callback service (could us a static function).
@@ -233,3 +233,28 @@ function neuronet_misc_update_8005(&$sandbox) {
     return $result_message;
   }
 }
+
+/**
+ * Re-save each profile to fill the computed preferred first name field
+ */
+function neuronet_misc_update_8006(&$sandbox) {
+  $entity_batch_update = \Drupal::service('neuronet_misc.entity_batch_update');
+  // Get & configure entity query for profiles
+  $query = $entity_batch_update->getEntityQuery('node');
+  $query = $query->condition('type', 'profile');
+  // Set node-wise callback service
+  $callback_service = \Drupal::service('neuronet_misc.refresh_fields');
+  $callback_service->addField('field_preferred_first_name_comp');
+  // Run batch.
+  $result_message = $entity_batch_update->runUpdate($sandbox, $query, 20, $callback_service);
+  if ($result_message) {
+    return $result_message;
+  }
+}
+
+// /**
+//  * Set each job's end date (new field) to the next later job's start date, if any
+//  */
+// function neuronet_misc_update_8007(&$sandbox) {
+  
+// }

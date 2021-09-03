@@ -1,0 +1,22 @@
+uuid: 4b0a68cc-e829-4137-b7f8-fb70837adb80
+langcode: en
+status: true
+dependencies:
+  module:
+    - computed_field
+    - node
+id: node.field_preferred_first_name_comp
+field_name: field_preferred_first_name_comp
+entity_type: node
+type: computed_string
+settings:
+  max_length: '255'
+  is_ascii: false
+  case_sensitive: false
+module: computed_field
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

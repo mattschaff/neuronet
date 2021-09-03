@@ -31,6 +31,7 @@ dependencies:
     - field.field.node.profile.field_neuroscience_interests
     - field.field.node.profile.field_ngg_activities
     - field.field.node.profile.field_non_ngg_activities
+    - field.field.node.profile.field_preferred_first_name_comp
     - field.field.node.profile.field_preferred_prefix
     - field.field.node.profile.field_preferred_pronouns
     - field.field.node.profile.field_profile_image
@@ -85,6 +86,7 @@ hidden:
   field_neuroscience_interests: true
   field_ngg_activities: true
   field_non_ngg_activities: true
+  field_preferred_first_name_comp: true
   field_preferred_prefix: true
   field_preferred_pronouns: true
   field_profile_image: true
