@@ -128,12 +128,12 @@ server_code=$(cat << EOF
 	drush cr &&
 
     echo &&
-    echo Importing config on prod site... &&
-    drush cim -y &&
-
-    echo &&
     echo Updating prod database... &&
     drush updb -y &&
+
+    echo &&
+    echo Importing config on prod site... &&
+    drush cim -y &&
 
     echo Cache-rebuilding... &&
     drush cr &&

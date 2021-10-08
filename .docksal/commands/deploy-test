@@ -106,15 +106,15 @@ server_code=$(cat << EOF
 	echo &&
 	echo Cache-rebuilding... &&
 	drush cr &&
-	
-	echo &&
-	echo Importing config files... &&
-	drush cim -y &&
 
 	echo &&
 	echo Updating database... &&
 	cd - &&
 	drush updb -y &&
+	
+	echo &&
+	echo Importing config files... &&
+	drush cim -y &&
 
 	echo &&
 	echo Cache-rebuilding... &&
