@@ -3,5 +3,6 @@ description: Provides search of Admin Toolbar items.
 package: Administration
 type: module
 core_version_requirement: ^8.8.0 || ^9.0
+configure: admin_toolbar_search.settings
 dependencies:
   - admin_toolbar:admin_toolbar_tools
