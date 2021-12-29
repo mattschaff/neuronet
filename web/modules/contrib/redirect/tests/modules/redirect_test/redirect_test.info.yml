@@ -1,0 +1,6 @@
+name: 'Redirect module tests'
+type: module
+description: 'Support module for redirect testing.'
+package: Testing
+dependencies:
+  - drupal:redirect

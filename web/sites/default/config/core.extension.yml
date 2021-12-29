@@ -36,7 +36,7 @@ module:
   help: 0
   history: 0
   image: 0
-  kint: 0
+  jquery_ui: 0
   layout_discovery: 0
   link: 0
   login_emailusername: 0

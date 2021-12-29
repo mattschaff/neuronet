@@ -27,7 +27,7 @@ class MimeMailFormatHelperTest extends KernelTestBase {
   ];
 
   /**
-   * Adminstrator.
+   * Administrator.
    *
    * @var \Drupal\user\UserInterface
    */
@@ -275,15 +275,13 @@ class MimeMailFormatHelperTest extends KernelTestBase {
    *   Whether the URL is absolute.
    * @param string $expected
    *   URL after formatting.
-   * @param string $message
-   *   Description of the result we are expecting.
    *
    * @dataProvider providerTestUrl
    * @covers ::mimeMailUrl
    */
-  public function testUrl($url, $absolute, $expected, $message) {
+  public function testUrl($url, $absolute, $expected) {
     $result = MimeMailFormatHelper::mimeMailUrl($url, $absolute);
-    $this->assertSame($result, $expected, $message);
+    $this->assertSame($expected, $result);
   }
 
   /**
@@ -294,25 +292,21 @@ class MimeMailFormatHelperTest extends KernelTestBase {
     // - url: URL to test.
     // - absolute: Whether the URL is absolute.
     // - expected: URL after formatting.
-    // - message: Description of the result we are expecting.
     return [
-      [
+      'Hash mark URL without fragment left intact.' => [
         '#',
         FALSE,
         '#',
-        'Hash mark URL without fragment left intact.',
       ],
-      [
+      'Security token removed from styled image URL.' => [
         '/sites/default/files/styles/thumbnail/public/image.jpg?itok=Wrl6Qi9U',
         TRUE,
         '/sites/default/files/styles/thumbnail/public/image.jpg',
-        'Security token removed from styled image URL.',
       ],
-      [
+      'Space in the filename of the attachment left intact.' => [
         $expected = 'public://' . $this->randomMachineName() . ' ' . $this->randomMachineName() . '.' . $this->randomMachineName(3),
         TRUE,
         $expected,
-        'Space in the filename of the attachment left intact.',
       ],
     ];
   }

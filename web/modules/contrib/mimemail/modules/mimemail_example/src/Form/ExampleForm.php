@@ -140,6 +140,8 @@ class ExampleForm extends FormBase {
         '#title' => $this->t('HTML message'),
         '#description' => $this->t("HTML version of the email body. This will be formatted using the text format selected at 'admin/config/system/mimemail'"),
       ],
+      // This form element forces plaintext-only email when there is no HTML
+      // content (that is, when the 'body' form element is empty).
       'plain' => [
         '#type' => 'hidden',
         '#states' => [
@@ -195,7 +197,7 @@ class ExampleForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    // Assemble arguments for MailManager::mail().
+    // First, assemble arguments for MailManager::mail().
     $module = 'mimemail_example';
     $key = $form_state->getValue('key');
     $to = $form_state->getValue('to');
@@ -204,7 +206,7 @@ class ExampleForm extends FormBase {
     $reply = $params['headers']['Reply-to'];
     $send = TRUE;
 
-    // Now add values to $params and/or modify submitted values.
+    // Second, add values to $params and/or modify submitted values.
     // Set From header.
     if (!empty($form_state->getValue('from_mail'))) {
       $params['headers']['From'] = MimeMailFormatHelper::mimeMailAddress([

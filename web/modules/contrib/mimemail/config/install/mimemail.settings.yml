@@ -1,10 +1,11 @@
-format: 'full_html'
 name : ''
 mail: ''
-linkonly: false
-textonly: false
-sitestyle: true
 simple_address: false
+sitestyle: true
+textonly: false
+linkonly: false
+user_plaintext_field: ''
+format: 'full_html'
 preserve_class: false
 advanced:
   incoming: false

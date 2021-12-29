@@ -4,15 +4,18 @@ namespace Drupal\mimemail\Form;
 
 use Drupal\Component\Utility\Crypt;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Extension\ThemeHandlerInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Mail\MailManagerInterface;
+use Drupal\Core\Url;
+use Drupal\field\Entity\FieldConfig;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Mime Mail settings form.
+ * Mime Mail administrative settings form.
  */
 class AdminForm extends ConfigFormBase {
 
@@ -38,7 +41,14 @@ class AdminForm extends ConfigFormBase {
   protected $themeHandler;
 
   /**
-   * Constructs a \Drupal\system\ConfigFormBase object.
+   * The entity type manager.
+   *
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  /**
+   * Constructs an AdminForm object.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The factory for configuration objects.
@@ -48,12 +58,15 @@ class AdminForm extends ConfigFormBase {
    *   The module handler service.
    * @param \Drupal\Core\Extension\ThemeHandlerInterface $theme_handler
    *   The theme handler service.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
    */
-  public function __construct(ConfigFactoryInterface $config_factory, MailManagerInterface $mail_manager, ModuleHandlerInterface $module_handler, ThemeHandlerInterface $theme_handler) {
+  public function __construct(ConfigFactoryInterface $config_factory, MailManagerInterface $mail_manager, ModuleHandlerInterface $module_handler, ThemeHandlerInterface $theme_handler, EntityTypeManagerInterface $entity_type_manager) {
     parent::__construct($config_factory);
     $this->mailManager = $mail_manager;
     $this->moduleHandler = $module_handler;
     $this->themeHandler = $theme_handler;
+    $this->entityTypeManager = $entity_type_manager;
   }
 
   /**
@@ -64,7 +77,8 @@ class AdminForm extends ConfigFormBase {
       $container->get('config.factory'),
       $container->get('plugin.manager.mail'),
       $container->get('module_handler'),
-      $container->get('theme_handler')
+      $container->get('theme_handler'),
+      $container->get('entity_type.manager')
     );
   }
 
@@ -137,7 +151,7 @@ class AdminForm extends ConfigFormBase {
       '#type' => 'checkbox',
       '#title' => $this->t('Send plain text email only'),
       '#default_value' => $config->get('textonly'),
-      '#description' => $this->t('This option disables the use of email messages with graphics and styles. All messages will be converted to plain text.'),
+      '#description' => $this->t('This option disables the use of email messages with graphics and styles. All messages will be converted to plain text. This option overrides the per-user choice configured below.'),
     ];
     $form['mimemail']['linkonly'] = [
       '#type'          => 'checkbox',
@@ -153,6 +167,30 @@ class AdminForm extends ConfigFormBase {
         '#description' => $this->t('This option disables the removing of class attributes from the message source. Useful for debugging the style of the message.'),
       ];
     }
+
+    // Find boolean fields attached to user objects. One of these may be
+    // selected and used as as a per-user opt-out of HTML mails in favor
+    // of plaintext, if desired.
+    $fields = ['' => $this->t('- None -')];
+    $field_config_storage = $this->entityTypeManager->getStorage('field_config');
+    $field_ids = $field_config_storage->getQuery()
+      ->condition('field_type', 'boolean')
+      ->condition('bundle', 'user')
+      ->execute();
+
+    foreach (FieldConfig::loadMultiple($field_ids) as $field) {
+      // Add to select option list.
+      $fields[$field->getName()] = $field->label();
+    }
+    $form['mimemail']['user_plaintext_field'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Plain text email only field'),
+      '#description' => $this->t('Allows users to specify they only want plain text email. This is done via a boolean field on the user profile. The site administrator must first <a href=":fields">add a boolean field to the user profile</a>, then choose that field here and save this setting. If the value of that field is TRUE for a given user, Mime Mail will only send plain text email to that user.', [
+        ':fields' => Url::fromRoute('entity.user.field_ui_fields')->toString(),
+      ]),
+      '#options' => $fields,
+      '#default_value' => $config->get('user_plaintext_field'),
+    ];
 
     // Get a list of all formats.
     $formats = filter_formats();
@@ -173,7 +211,7 @@ class AdminForm extends ConfigFormBase {
     $form['mimemail']['advanced'] = [
       '#type' => 'details',
       '#title' => $this->t('Advanced settings'),
-      '#open' => TRUE,
+      '#open' => FALSE,
     ];
     $form['mimemail']['advanced']['incoming'] = [
       '#type' => 'checkbox',
@@ -201,10 +239,11 @@ class AdminForm extends ConfigFormBase {
       ->set('format', $form_state->getValue('format'))
       ->set('name', $form_state->getValue('name'))
       ->set('mail', $form_state->getValue('mail'))
-      ->set('linkonly', $form_state->getValue('linkonly'))
-      ->set('textonly', $form_state->getValue('textonly'))
-      ->set('sitestyle', $form_state->getValue('sitestyle'))
       ->set('simple_address', $form_state->getValue('simple_address'))
+      ->set('sitestyle', $form_state->getValue('sitestyle'))
+      ->set('textonly', $form_state->getValue('textonly'))
+      ->set('linkonly', $form_state->getValue('linkonly'))
+      ->set('user_plaintext_field', $form_state->getValue('user_plaintext_field'))
       ->set('advanced.incoming', $form_state->getValue('incoming'))
       ->set('advanced.key', $form_state->getValue('key'));
     if ($form_state->hasValue('preserve_class')) {

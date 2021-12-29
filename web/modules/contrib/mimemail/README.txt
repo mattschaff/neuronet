@@ -3,7 +3,7 @@
 
 This is a Mime Mail component module (for use by other modules).
  * It permits users to receive HTML email and can be used by other modules.
-   The mail functionality accepts an HTML message body, mime-encodes it and
+   The mail functionality accepts an HTML message body, MIME-encodes it and
    sends it.
  * If the HTML has embedded graphics, these graphics are MIME-encoded and
    included as message attachments.
@@ -132,7 +132,7 @@ MAINTAINER: Allie Micka < allie at pajunas dot com >
    Mime enhancements and HTML mail code
 
  * Gerhard Killesreiter
-   Original mail and mime code
+   Original mail and MIME code
 
  * Robert Castelo
    HTML to Text and other functionality

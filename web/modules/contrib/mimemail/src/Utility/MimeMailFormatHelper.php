@@ -6,13 +6,12 @@ use Drupal\Component\Utility\Mail;
 use Drupal\Component\Utility\Unicode;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Mail\MailFormatHelper;
-use Drupal\Core\Site\Settings;
 use Drupal\Core\StreamWrapper\StreamWrapperManager;
 use Drupal\Core\Url;
 use Drupal\user\UserInterface;
 
 /**
- * Defines a class containing utility methods for formatting mime mail messages.
+ * Utility methods for formatting MIME-encoded email messages.
  */
 class MimeMailFormatHelper {
 
@@ -84,7 +83,7 @@ class MimeMailFormatHelper {
     }
 
     // It's a formatted or unformatted string.
-    // The logic is a little different here because we didn't recieve the
+    // The logic is a little different here because we didn't receive the
     // string already separated into parts like we had in the above cases.
     if (is_string($address)) {
       $pattern = '/(.*?)<(.*?)>/';
@@ -116,7 +115,7 @@ class MimeMailFormatHelper {
   /**
    * Generates a multipart message body with a plaintext alternative.
    *
-   * The first mime part is a multipart/alternative containing mime-encoded
+   * The first MIME part is a multipart/alternative containing MIME-encoded
    * sub-parts for HTML and plaintext. Each subsequent part is the required
    * image or attachment.
    *
@@ -173,7 +172,18 @@ class MimeMailFormatHelper {
 
       // Expand all local links.
       $pattern = '/(<a[^>]+href=")([^"]*)/mi';
-      $body = preg_replace_callback($pattern, [MimeMailFormatHelper::class, 'expandLinks'], $body);
+      $body = preg_replace_callback(
+        $pattern,
+        function ($matches) {
+          // matches[1] is the anchor tag starting with the <, up to and
+          // including the starting quote of the href attribute.
+          //
+          // matches[2] is everything between quotes in the href attribute
+          // of an anchor tag.
+          return $matches[1] . self::mimeMailUrl($matches[2]);
+        },
+        $body
+      );
 
       $mime_parts = static::mimeMailExtractFiles($body);
 
@@ -201,9 +211,13 @@ class MimeMailFormatHelper {
         $content = isset($a->filecontent) ? $a->filecontent : NULL;
         $name = isset($a->filename) ? $a->filename : NULL;
         $type = isset($a->filemime) ? $a->filemime : NULL;
+        // Add this attachment to the cumulative manifest being built by
+        // mimeMailFile().
         static::mimeMailFile($path, $content, $name, $type, 'attachment');
-        $parts = array_merge($parts, static::mimeMailFile());
       }
+      // Fetch the cumulative manifest from mimeMailFile() and merge it with
+      // the other parts of this message.
+      $parts = array_merge($parts, static::mimeMailFile());
     }
 
     return static::mimeMailMultipartBody($parts, $content_type);
@@ -236,7 +250,27 @@ class MimeMailFormatHelper {
    */
   public static function mimeMailExtractFiles($html) {
     $pattern = '/(<link[^>]+href=[\'"]?|<object[^>]+codebase=[\'"]?|@import |[\s]src=[\'"]?)([^\'>"]+)([\'"]?)/mis';
-    $content = preg_replace_callback($pattern, [MimeMailFormatHelper::class, 'replaceFiles'], $html);
+    $content = preg_replace_callback(
+      $pattern,
+      function ($matches) {
+        // matches[1] is one of:
+        // - A link tag starting with the <, up to and including the starting
+        //   quote of the href attribute. OR,
+        // - An object tag starting with the <, up to and including the starting
+        //   quote of the codebase attribute. OR,
+        // - A CSS @import rule starting with the @, up to and including the
+        //   starting quote of the url property. OR,
+        // - A tag with a src attribute, starting with the whitespace before the
+        //   src, up to and including the starting quote of the src attribute.
+        //
+        // matches[2] is everything between quotes after one of the above
+        // matches.
+        //
+        // matches[3] is the trailing quote.
+        return stripslashes($matches[1]) . self::mimeMailFile($matches[2]) . stripslashes($matches[3]);
+      },
+      $html
+    );
 
     $encoding = '8Bit';
     $body = explode("\n", $content);
@@ -262,26 +296,72 @@ class MimeMailFormatHelper {
   }
 
   /**
-   * Helper function to extract local files.
+   * Builds a manifest containing metadata about files attached to an email.
+   *
+   * Calling this function with either a $url argument or a $content argument
+   * will generate metadata for the file described by that argument and will
+   * accumulate that metadata internally in a static array. Subsequent calls
+   * with one of these arguments will add additional metadata to this internal
+   * array.
+   *
+   * Calling this function with no arguments will return everything stored in
+   * the internal static array by all previous calls (this is the 'manifest'),
+   * then will clear the contents of the internal static array.
+   *
+   * The manifest is an associative array indexed by the Content-ID, which is a
+   * unique identifier calculated internally using a hash of the attachment name
+   * and the server's host name. The required (always present) keys of this
+   * manifest array are:
+   * - name: The file name of the attachment.
+   * - file: The absolute URL of the file or the contents of the file.
+   * - Content-ID: The unique identifier of the file.
+   * - Content-Disposition: How the file is attached - either 'inline' or
+   *   'attachment'.
+   * - Content-Type: MIME type of the file.
    *
    * @param string $url
-   *   (optional) The URI or the absolute URL to the file.
+   *   (optional) The URI or the absolute URL of the file.
    * @param string $content
-   *   (optional) The actual file content.
+   *   (optional) The actual file content. This is required if $url is not set.
    * @param string $name
    *   (optional) The file name.
    * @param string $type
-   *   (optional) The file type.
+   *   (optional) The MIME type of the file.
    * @param string $disposition
-   *   (optional) The content disposition. Defaults to inline.
+   *   (optional) The content disposition. One of 'inline' or 'attachment'.
+   *   Defaults to 'inline'.
    *
    * @return mixed
-   *   The Content-ID and/or an array of the files on success or the URL on
-   *   failure.
+   *   Returned value is one of:
+   *   - The Content-ID, if this function is called with either a $url or a
+   *     $content argument.
+   *   - An array of accumulated metadata indexed by Content-ID if this function
+   *     is called with no arguments. The structure of this metadata (the
+   *     'manifest') is described above.
+   *   - URL if the $url is not a local file and $content is not set.
    */
   public static function mimeMailFile($url = NULL, $content = NULL, $name = '', $type = '', $disposition = 'inline') {
+    // A cumulative manifest of metadata about the files that are attached
+    // to an email message.
     static $files = [];
-    static $ids = [];
+
+    /** @var \Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface $mime_type_guesser */
+    $mime_type_guesser = \Drupal::service('file.mime_type.guesser');
+
+    /** @var \Drupal\Core\File\FileSystemInterface $file_system */
+    $file_system = \Drupal::service('file_system');
+
+    /** @var \Drupal\Core\Config\ImmutableConfig file_config */
+    $file_config = \Drupal::config('system.file');
+
+    /** @var \Symfony\Component\HttpFoundation\Request $current_request */
+    $current_request = \Drupal::requestStack()->getCurrentRequest();
+
+    /** @var \Drupal\Core\Session\AccountProxyInterface $current_user */
+    $current_user = \Drupal::currentUser();
+
+    /** @var \Drupal\Core\Config\ImmutableConfig $mimemail_config */
+    $mimemail_config = \Drupal::config('mimemail.settings');
 
     if ($url) {
       $image = preg_match('!\.(png|gif|jpg|jpeg)$!i', $url);
@@ -293,23 +373,14 @@ class MimeMailFormatHelper {
       }
       else {
         $url = static::mimeMailUrl($url, TRUE);
-        // @todo In Drupal 8.8.x file_uri_scheme() has been deprecated.
-        // Remove this conditional statement once 8.7.x is unsupported.
-        // @see https://www.drupal.org/project/mimemail/issues/3126782
-        if (version_compare(substr(\Drupal::VERSION, 0, 3), '8.8', '>=')) {
-          // The $url is absolute, we're done here.
-          $scheme = StreamWrapperManager::getScheme($url);
-        }
-        else {
-          // The $url is absolute, we're done here.
-          $scheme = file_uri_scheme($url);
-        }
+        // The $url is absolute, we're done here.
+        $scheme = StreamWrapperManager::getScheme($url);
         if ($scheme == 'http' || $scheme == 'https' || preg_match('!mailto:!', $url)) {
           return $url;
         }
         // The $url is a non-local URI that needs to be converted to a URL.
         else {
-          $file = (\Drupal::service('file_system')->realpath($url)) ? \Drupal::service('file_system')->realpath($url) : file_create_url($url);
+          $file = $file_system->realpath($url) ? $file_system->realpath($url) : file_create_url($url);
         }
       }
     }
@@ -319,9 +390,9 @@ class MimeMailFormatHelper {
     }
 
     if (isset($file) && (@is_file($file) || $content)) {
-      $public_path = \Drupal::config('system.file')->get('default_scheme') . '://';
-      $no_access = !\Drupal::currentUser()->hasPermission('send arbitrary files');
-      $not_in_public_path = mb_strpos(\Drupal::service('file_system')->realpath($file), \Drupal::service('file_system')->realpath($public_path)) !== 0;
+      $public_path = $file_config->get('default_scheme') . '://';
+      $no_access = !$current_user->hasPermission('send arbitrary files');
+      $not_in_public_path = mb_strpos($file_system->realpath($file), $file_system->realpath($public_path)) !== 0;
       if (@is_file($file) && $not_in_public_path && $no_access) {
         return $url;
       }
@@ -330,30 +401,34 @@ class MimeMailFormatHelper {
         $name = (@is_file($file)) ? basename($file) : 'attachment.dat';
       }
       if (!$type) {
-        $type = ($name) ? \Drupal::service('file.mime_type.guesser')->guess($name) : \Drupal::service('file.mime_type.guesser')->guess($file);
+        // @todo $name will ALWAYS be TRUE here because of the above if{}.
+        $type = ($name) ? $mime_type_guesser->guess($name) : $mime_type_guesser->guess($file);
       }
 
-      $id = md5($file) . '@' . $_SERVER['HTTP_HOST'];
+      // Generate a unique ID using the HTTP host requested.
+      $id = md5($file) . '@' . $current_request->getHttpHost();
 
-      // Prevent duplicate items.
-      if (isset($ids[$id])) {
-        return 'cid:' . $ids[$id];
+      // Prevent attaching the same file more than once. For example, an image
+      // that's part of the theme may be referenced many times in the HTML, but
+      // should only be attached once.
+      if (!isset($files[$id])) {
+        // This is a new file that needs to be attached.
+        // Store the metadata in our static $files array indexed by $id.
+        $files[$id] = [
+          'name' => $name,
+          'file' => $file,
+          'Content-ID' => $id,
+          'Content-Disposition' => $disposition,
+          'Content-Type' => $type,
+        ];
       }
 
-      $new_file = [
-        'name' => $name,
-        'file' => $file,
-        'Content-ID' => $id,
-        'Content-Disposition' => $disposition,
-        'Content-Type' => $type,
-      ];
-
-      $files[] = $new_file;
-      $ids[$id] = $id;
-
+      // Return the content id for this item.
       return 'cid:' . $id;
     }
-    // The $file does not exist and no $content, return the $url if possible.
+
+    // The $file does not exist and no $content was provided.
+    // Return the $url if possible.
     elseif ($url) {
       return $url;
     }
@@ -377,19 +452,17 @@ class MimeMailFormatHelper {
    *   A processed URL.
    */
   public static function mimeMailUrl($url, $to_embed = FALSE) {
+    /** @var \Drupal\Core\Config\ImmutableConfig $mimemail_config */
+    $mimemail_config = \Drupal::config('mimemail.settings');
+
+    /** @var \Drupal\Core\Language\LanguageManagerInterface $language_manager */
+    $language_manager = \Drupal::languageManager();
+
     $url = urldecode($url);
 
-    $to_link = \Drupal::config('mimemail.settings')->get('linkonly');
+    $to_link = $mimemail_config->get('linkonly');
     $is_image = preg_match('!\.(png|gif|jpg|jpeg)!i', $url);
-    // @todo In Drupal 8.8.x FileSystem::uriScheme() has been deprecated.
-    // Remove this conditional statement once 8.7.x is unsupported.
-    // @see https://www.drupal.org/project/mimemail/issues/3126782
-    if (version_compare(substr(\Drupal::VERSION, 0, 3), '8.8', '>=')) {
-      $is_absolute = StreamWrapperManager::getScheme($url) != FALSE || preg_match('!(mailto|callto|tel)\:!', $url);
-    }
-    else {
-      $is_absolute = \Drupal::service('file_system')->uriScheme($url) != FALSE || preg_match('!(mailto|callto|tel)\:!', $url);
-    }
+    $is_absolute = StreamWrapperManager::getScheme($url) != FALSE || preg_match('!(mailto|callto|tel)\:!', $url);
 
     // Strip the base path as Uri adds it again at the end.
     $base_path = rtrim(base_path(), '/');
@@ -428,11 +501,11 @@ class MimeMailFormatHelper {
     }
 
     // Get a list of enabled languages.
-    $languages = \Drupal::languageManager()->getLanguages(LanguageInterface::STATE_ALL);
+    $languages = $language_manager->getLanguages(LanguageInterface::STATE_ALL);
 
     // Default language settings.
     $prefix = '';
-    $language = \Drupal::languageManager()->getDefaultLanguage();
+    $language = $language_manager->getDefaultLanguage();
 
     // Check for language prefix.
     $args = explode('/', $path);
@@ -500,14 +573,25 @@ class MimeMailFormatHelper {
     // Control variable to avoid boundary collision.
     static $part_num = 0;
 
-    $boundary = sha1(uniqid($_SERVER['REQUEST_TIME'], TRUE)) . $part_num++;
+    /** @var \Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface $mime_type_guesser */
+    $mime_type_guesser = \Drupal::service('file.mime_type.guesser');
+
+    /** @var \Drupal\Component\Datetime\TimeInterface $time */
+    $time = \Drupal::time();
+
+    // Compute boundary hash.
+    $request_time = $time->getRequestTime();
+    $boundary = sha1(uniqid($request_time, TRUE)) . $part_num++;
+
+    // Header for mail body.
     $body = '';
     $headers = ['Content-Type' => "$content_type; boundary=\"$boundary\""];
     if (!$sub_part) {
       $headers['MIME-Version'] = '1.0';
-      $body = "This is a multi-part message in MIME format.\n";
+      $body = 'This is a multi-part message in MIME format.' . static::CRLF;
     }
 
+    // Part headers and contents.
     foreach ($parts as $part) {
       $part_headers = [];
 
@@ -549,7 +633,7 @@ class MimeMailFormatHelper {
         }
 
         if (!isset($part['Content-Type'])) {
-          $part['Content-Type'] = \Drupal::service('file.mime_type.guesser')->guess($part['file']);
+          $part['Content-Type'] = $mime_type_guesser->guess($part['file']);
         }
 
         if (isset($part['name'])) {
@@ -559,16 +643,15 @@ class MimeMailFormatHelper {
 
         if (isset($part['file'])) {
           $file = (is_file($part['file'])) ? file_get_contents($part['file']) : $part['file'];
-          $part_body = chunk_split(base64_encode($file), 76, Settings::get('mail_line_endings', PHP_EOL));
-
+          $part_body = chunk_split(base64_encode($file), 76, static::CRLF);
         }
       }
 
-      $body .= "\n--$boundary\n";
-      $body .= static::mimeMailRfcHeaders($part_headers) . "\n";
+      $body .= static::CRLF . "--$boundary" . static::CRLF;
+      $body .= static::mimeMailRfcHeaders($part_headers) . static::CRLF;
       $body .= isset($part_body) ? $part_body : '';
     }
-    $body .= "\n--$boundary--\n";
+    $body .= static::CRLF . "--$boundary--" . static::CRLF;
 
     return ['headers' => $headers, 'body' => $body];
   }
@@ -633,10 +716,12 @@ class MimeMailFormatHelper {
    *   Overwritten headers.
    */
   public static function mimeMailHeaders(array $headers, $from = NULL) {
-    $default_from = \Drupal::config('system.site')->get('mail');
+    /** @var \Drupal\Core\Config\ImmutableConfig $site_config */
+    $site_config = \Drupal::config('system.site');
 
     // Overwrite standard headers.
     if ($from) {
+      $default_from = $site_config->get('mail');
       if (!isset($headers['From']) || $headers['From'] == $default_from) {
         $headers['From'] = $from;
       }
@@ -663,28 +748,6 @@ class MimeMailFormatHelper {
     }
 
     return $headers;
-  }
-
-  /**
-   * Callback for preg_replace_callback.
-   *
-   * @param $matches
-   *
-   * @return string
-   */
-  public static function expandLinks($matches) {
-    return $matches[1] . self::mimeMailUrl($matches[2]);
-  }
-
-  /**
-   * Callback for preg_replace_callback.
-   *
-   * @param $matches
-   *
-   * @return string
-   */
-  public static function replaceFiles($matches) {
-    return stripslashes($matches[1]) . self::mimeMailFile($matches[2]) . stripslashes($matches[3]);
   }
 
 }
