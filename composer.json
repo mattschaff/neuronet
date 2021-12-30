@@ -28,7 +28,7 @@
         }
     ],
     "require": {
-        "composer/installers": "^1.2",
+        "composer/installers": "~1.0",
         "cweagans/composer-patches": "~1.0",
         "drupal/admin_toolbar": "~3.0",
         "drupal/adminimal_admin_toolbar": "~1.0",
@@ -64,9 +64,9 @@
         "drupal/pathauto": "~1.0",
         "drupal/redirect": "~1.0",
         "drupal/smtp": "~1.0",
-        "drupal/switch_page_theme": "~1.0",
         "drupal/taxonomy_manager": "~2.0",
         "drupal/term_csv_export_import": "~3.0",
+        "drupal/theme_switcher": "~1.0",
         "drupal/token": "~1.0",
         "drupal/twig_tweak": "~2.0",
         "drupal/views_bootstrap": "~3.0",

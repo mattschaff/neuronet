@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5b9b9d29f6722c7c57e9a090301f3a0a",
+    "content-hash": "356c271c99089c4c6846110526c018d7",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4310,54 +4310,6 @@
             }
         },
         {
-            "name": "drupal/switch_page_theme",
-            "version": "1.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/switch_page_theme.git",
-                "reference": "8.x-1.0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/switch_page_theme-8.x-1.0.zip",
-                "reference": "8.x-1.0",
-                "shasum": "77016580b68cfad9e65991b3d0ed8477a4e5b3aa"
-            },
-            "require": {
-                "drupal/core": "~8.0"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "8.x-1.0",
-                    "datestamp": "1505717644",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "ashish-deynap",
-                    "homepage": "https://www.drupal.org/user/3417767"
-                },
-                {
-                    "name": "deepali_agarwal",
-                    "homepage": "https://www.drupal.org/user/2438242"
-                }
-            ],
-            "description": "Switches active theme on specific pages.",
-            "homepage": "https://www.drupal.org/project/switch_page_theme",
-            "support": {
-                "source": "https://git.drupalcode.org/project/switch_page_theme"
-            }
-        },
-        {
             "name": "drupal/taxonomy_manager",
             "version": "2.0.6",
             "source": {
@@ -4480,6 +4432,57 @@
             "homepage": "https://www.drupal.org/project/term_csv_export_import",
             "support": {
                 "source": "https://git.drupalcode.org/project/term_csv_export_import"
+            }
+        },
+        {
+            "name": "drupal/theme_switcher",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/theme_switcher.git",
+                "reference": "8.x-1.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/theme_switcher-8.x-1.2.zip",
+                "reference": "8.x-1.2",
+                "shasum": "d9ac27a941e50d45067e1e3b087e7eb8709f904a"
+            },
+            "require": {
+                "drupal/core": "^8.5 || ^9",
+                "php": ">=7.1"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.2",
+                    "datestamp": "1624695689",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Adrián Marín",
+                    "homepage": "https://www.drupal.org/user/3529039",
+                    "email": "amarincolas@gmail.com"
+                },
+                {
+                    "name": "mkalkbrenner",
+                    "homepage": "https://www.drupal.org/user/124705"
+                }
+            ],
+            "description": "Creates Theme Switcher Rules within a Drupal installation.",
+            "homepage": "https://www.drupal.org/project/theme_switcher",
+            "support": {
+                "source": "http://cgit.drupalcode.org/theme_switcher",
+                "issues": "http://drupal.org/project/issues/theme_switcher"
             }
         },
         {
@@ -9235,5 +9238,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.1.0"
 }

@@ -78,3 +78,4 @@ docksal-local.yml
 # Ignore manually cloned modules to avoid making submodule #
 /web/modules/contrib/views_distinct
 /web/modules/contrib/computed_field
+/web/modules/contrib/theme_switcher
