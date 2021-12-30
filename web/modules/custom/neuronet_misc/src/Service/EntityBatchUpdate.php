@@ -4,8 +4,9 @@ namespace Drupal\neuronet_misc\Service;
 
 use Drupal\Core\Database\Connection;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Entity\Query\QueryFactoryInterface;
+use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
+use Drupal\neuronet_misc\EntityBatchUpdateCallbackInterface;
 
 /**
  * Service that allows update hooks to access the batch system
@@ -40,7 +41,7 @@ class EntityBatchUpdate {
    * Get EntityQuery object
    *
    * @param string $entity_type_id
-   * @return QueryFactoryInterface
+   * @return QueryInterface
    */
   public function getEntityQuery($entity_type_id) {
     return $this->entityTypeManager
@@ -53,9 +54,9 @@ class EntityBatchUpdate {
    * Run batch update
    *
    * @param array $sandbox
-   * @param QueryFactoryInterface $query
+   * @param QueryInterface $query
    * @param integer $limit
-   * @param string|object $callback
+   * @param string|EntityBatchUpdateCallbackInterface $callback
    * @return string
    *   Returns final message
    */

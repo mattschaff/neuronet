@@ -6,7 +6,7 @@ use Drupal\Core\Action\ActionBase;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\node\NodeInterface;
-use \Drupal\user\Entity\User;
+use Drupal\user\Entity\User;
 
 
 /**
@@ -43,7 +43,7 @@ class EmailLoginInfo extends ActionBase {
           $params['action_values']['body'] = _neuronet_alumnus_email_body($link);
           $to = $user->get('mail')->value;
           $mailManager->mail('neuronet_misc', 'login', $to, $langcode, $params);
-          drupal_set_message($message = 'Login link email sent to ' . $node->getTitle(), $type = 'status');
+          \Drupal::messenger()->addStatus('Login link email sent to ' . $node->getTitle());
         }
       }
   }
@@ -78,7 +78,7 @@ function _neuronet_alumnus_email_body($link) {
 
 <p>Thanks for your time and efforts with this!</p>
 
-<p>Alice Dallstream</p>
-<p>The NeuroNet Committee (Matt Schaff, Alice Dallstream, Sydney Cason, Rebecca Somach, Jeni Stiso)</p>";
+<p>Ethan Blackwood</p>
+<p>The NeuroNet Committee (Matt Schaff, Ethan Blackwood, Catrina Hacker, Emily Pickup, and David Goldberg)</p>";
 return $body;
 }

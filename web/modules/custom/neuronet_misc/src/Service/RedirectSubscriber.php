@@ -45,9 +45,9 @@ class RedirectSubscriber implements EventSubscriberInterface {
        $result = $query->fetchAll();
        if (!empty($result)) {
          $nid = $result[0]->field_profile_target_id;
-         $alias = \Drupal::service('path.alias_manager')->getAliasByPath('/node/'.$nid);
+         $alias = \Drupal::service('path_alias.manager')->getAliasByPath('/node/'.$nid);
          $response = new TrustedRedirectResponse($base_url . $alias);
-         return $response->send();
+         \Drupal::service('http_middleware.neuronet_misc_redirect')->setRedirectResponse($response);
        }
      }
     }

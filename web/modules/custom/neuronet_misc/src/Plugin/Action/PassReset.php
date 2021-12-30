@@ -43,7 +43,7 @@ class PassReset extends ActionBase {
           $params['action_values']['body'] = _neuronet_pass_reset_body($link);
           $to = $user->get('mail')->value;
           $mailManager->mail('neuronet_misc', 'passreset', $to, $langcode, $params);
-          drupal_set_message($message = 'Password reset link sent to ' . $node->getTitle(), $type = 'status');
+          \Drupal::messenger()->addStatus('Password reset link sent to ' . $node->getTitle());
         }
       }
   }
@@ -67,7 +67,7 @@ function _neuronet_pass_reset_body($link) {
 
 <p>Sincerely,</p>
 
-<p>Alice Dallstream</p>
-<p>The NeuroNet Committee (Matt Schaff, Alice Dallstream, Sydney Cason, Rebecca Somach, Jeni Stiso)</p>";
+<p>Ethan Blackwood</p>
+<p>The NeuroNet Committee (Matt Schaff, Ethan Blackwood, Catrina Hacker, Emily Pickup, and David Goldberg)</p>";
 return $body;
 }

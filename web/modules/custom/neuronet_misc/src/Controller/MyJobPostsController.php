@@ -6,10 +6,11 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\user\ProfileForm;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Session\AccountInterface;
-use \Symfony\Component\Routing\Route;
+use Symfony\Component\Routing\Route;
 use Drupal\node\NodeInterface;
-use \Drupal\user\Entity\User;
+use Drupal\user\Entity\User;
 use Drupal\views\Views;
+use Drupal\Core\Url;
 
 class MyJobPostsController extends ControllerBase {
 
@@ -24,13 +25,12 @@ class MyJobPostsController extends ControllerBase {
     $connection = \Drupal::database();
     $query = $connection->query("SELECT entity_id FROM {user__field_profile} WHERE field_profile_target_id = :field_profile_target_id", [':field_profile_target_id' => $node->id()]);
     $result = $query->fetchAll();
-    $node_alias = \Drupal::url("neuronet_misc.my_job_posts", ["node" => $node->id()]);
+    $node_alias = Url::fromRoute("neuronet_misc.my_job_posts", ["node" => $node->id()])->toString();
     return [
       'button' => [
         '#type' => 'markup',
-        '#markup' => '<a class="btn btn-primary trigger" href="' . \Drupal::url("node.add", ['node_type' => 'job_posting']) . '?destination=' .
-        $node_alias .
-        '" title="Edit" data-dialog-type="modal">'. $this->t('Post Job') . '</a>',
+        '#markup' => '<a class="btn btn-primary trigger" href="' . Url::fromRoute("node.add", ['node_type' => 'job_posting'])->toString() .
+         '?destination=' . $node_alias . '" title="Edit" data-dialog-type="modal">'. $this->t('Post Job') . '</a>',
       ],
       'job_board' => [
         '#type' => 'view',

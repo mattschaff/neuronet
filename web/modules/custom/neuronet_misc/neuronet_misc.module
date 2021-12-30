@@ -25,6 +25,7 @@ use Drupal\Core\Asset\AttachedAssetsInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\TrustedRedirectResponse;
+use Drupal\Core\Url;
 
 use Drupal\neuronet_misc\Service\CompletedFields;
 use Drupal\node\Entity\Node;
@@ -55,15 +56,22 @@ function neuronet_misc_views_pre_render(\Drupal\views\ViewExecutable $view) {
   if($view->id() == 'alumni'){
     $indexes_to_remove = array();
     foreach($view->result as $value){
-      // it is VERY annoying to get entity reference values in Drupal 8
-      $nid = $value->_entity->get('field_profile')->first()->get('entity')->getTarget()->getValue()->get('nid')->value;
-      $start_date = $value->_entity->get('field_start_date')->value;
+      /** @var NodeInterface $job */
+      $job = $value->_entity;
+      /** @var NodeInterface $profile */
+      $profile = $job->field_profile->entity;
+      $nid = $profile->get('nid')->value;
+      $start_date = $job->get('field_start_date')->value;
       $index = 0;
       foreach($view->result as $value2){
-        $sub_nid = $value2->_entity->get('field_profile')->first()->get('entity')->getTarget()->getValue()->get('nid')->value;
+        /** @var NodeInterface $job2 */
+        $job2 = $value2->_entity;
+        /** @var NodeInterface @profile2_ref */
+        $profile2 = $job2->field_profile->entity;
+        $sub_nid = $profile2->get('nid')->value;
         if ($nid == $sub_nid) {
-          $start_date = $value->_entity->get('field_start_date')->value;
-          $start_date2 = $value2->_entity->get('field_start_date')->value;
+          $start_date = $job->get('field_start_date')->value;
+          $start_date2 = $job2->get('field_start_date')->value;
           if (date($start_date2) < date($start_date)) {
             $indexes_to_remove[] = $index;
           }
@@ -91,6 +99,7 @@ function neuronet_misc_views_pre_render(\Drupal\views\ViewExecutable $view) {
     if (!empty($sent_email_data)) {
       $email_sent = $sent_email_data['email_sent'];
       // Get sender profile ID.
+      /** @var UserInterface $sender_profile */
       $sender_profile = \Drupal::entityTypeManager()
         ->getStorage('user')
         ->load(\Drupal::currentUser()->id());
@@ -227,7 +236,7 @@ function neuronet_misc_form_alter(&$form, FormStateInterface $form_state, $form_
   if ($form_id == 'node_job_form') {
     $form['title']['widget'][0]['value']['#default_value'] = sha1(md5(rand(0,10)));
     if ($profile_id = \Drupal::request()->query->get('profile')) {
-      $form['field_profile']['widget'][0]['target_id']['#default_value'] = \Drupal::entityManager()->getStorage('node')->load($profile_id);
+      $form['field_profile']['widget'][0]['target_id']['#default_value'] = \Drupal::entityTypeManager()->getStorage('node')->load($profile_id);
     }
     else {
       $url = \Drupal::request()->headers->get('referer') ? \Drupal::request()->headers->get('referer') : \Drupal::request()->query->get('destination');
@@ -236,8 +245,7 @@ function neuronet_misc_form_alter(&$form, FormStateInterface $form_state, $form_
       \Drupal::messenger()->addWarning(t('You must add to the job history from a profile page.'));
       if ($url) {
         $response = new TrustedRedirectResponse($url);
-        $response->send();
-        exit();
+        \Drupal::service('http_middleware.neuronet_misc_redirect')->setRedirectResponse($response);
       }
     }
   }
@@ -437,13 +445,12 @@ function neuronet_misc_user_login(AccountInterface $account) {
   $roles = $account->getRoles();
   if (\Drupal::routeMatch()->getRouteName() != 'user.reset.login') {
     if (in_array('current_student', $roles) || in_array('administrator', $roles)) {
-      $response = new RedirectResponse(\Drupal::url('view.current_students.page_1'));
-      return $response->send();
+      $response = new RedirectResponse(Url::fromRoute('view.current_students.page_1')->toString());
     }
     else {
-      $response = new RedirectResponse(\Drupal::url('user.page'));
-      return $response->send();
+      $response = new RedirectResponse(Url::fromRoute('user.page')->toString());
     }
+    \Drupal::service('http_middleware.neuronet_misc_redirect')->setRedirectResponse($response);
   }
 }
 

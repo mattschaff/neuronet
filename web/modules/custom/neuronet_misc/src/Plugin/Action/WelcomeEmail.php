@@ -29,7 +29,7 @@ class WelcomeEmail extends ActionBase {
       $entity->save();
     }*/
     $node = $entity;
-     $connection = \Drupal::database();
+    $connection = \Drupal::database();
     $query = $connection->query("SELECT entity_id FROM {user__field_profile} WHERE field_profile_target_id = :field_profile_target_id", [':field_profile_target_id' => $node->id()]);
     $result = $query->fetchAll();
       if (!empty($result)) {
@@ -43,7 +43,7 @@ class WelcomeEmail extends ActionBase {
           $params['action_values']['body'] = _neuronet_welcome_email_body($link);
           $to = $user->get('mail')->value;
           $mailManager->mail('neuronet_misc', 'welcome', $to, $langcode, $params);
-          drupal_set_message($message = 'Welcome email sent to ' . $node->getTitle(), $type = 'status');
+          \Drupal::messenger()->addStatus('Welcome email sent to ' . $node->getTitle());
         }
       }
   }
@@ -81,6 +81,7 @@ function _neuronet_welcome_email_body($link) {
 <p>Questions? Concerns? Contact neuronet.glia@gmail.com</p>
 
 <p>Best regards! </p>
-<p> NeuroNet Committee  (Matt &quot;Web Developer&quot; Schaff, Alice Dallstream, Sydney Cason, Rebecca Somach, Jeni Stiso)</p>";
+<p>Ethan Blackwood</p>
+<p>The NeuroNet Committee (Matt Schaff, Ethan Blackwood, Catrina Hacker, Emily Pickup, and David Goldberg)</p>";
 return $body;
 }

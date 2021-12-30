@@ -15,6 +15,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Routing\UrlGeneratorTrait;
 use Drupal\Core\Mail\MailManager;
 use Drupal\Core\Database\Connection;
+use Drupal\Core\Url;
+use Drupal\user\Entity\User;
 
 /**
  * Action to send a custom email
@@ -140,8 +142,8 @@ class SendCustomEmail extends ViewsBulkOperationsActionBase implements Container
     $config = $this->state->get('neuronet_misc.custom_emails');
     if (empty($config['emails_container']) && !is_null($this->context['redirect_url'])) {
       $this->tempStore->set(\Drupal::currentUser()->id(), $this->context['redirect_url']->getRouteName());
-      $response = new RedirectResponse(\Drupal::url('neuronet_misc.custom_emails'));
-      $response->send();
+      $response = new RedirectResponse(Url::fromRoute('neuronet_misc.custom_emails')->toString());
+      \Drupal::service('http_middleware.neuronet_misc_redirect')->setRedirectResponse($response);
     }
     return $config['emails_container'];
   }
@@ -183,6 +185,7 @@ class SendCustomEmail extends ViewsBulkOperationsActionBase implements Container
       $result = $this->entityTypeManager->getStorage('user')->loadByProperties([
         'field_profile' => $entity->id(),
       ]);
+      /** @var User $user */
       if ($user = reset($result)) {
         // Don't send mail to people who have disabled notifications.
         if (!$user->get('field_general_emails')->value) {

@@ -5,11 +5,12 @@ namespace Drupal\neuronet_misc\Plugin\Block;
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Path\AliasManagerInterface;
+use Drupal\path_alias\AliasManagerInterface;
 use Drupal\Core\Path\CurrentPathStack;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Session\AccountInterface;
+use Drupal\user\UserInterface;
 use Drupal\Core\Url;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -48,7 +49,7 @@ class AddJobBlock extends BlockBase implements ContainerFactoryPluginInterface {
   /**
    * Current User service
    *
-   * @var AccountInterface
+   * @var UserInterface
    */
   protected $currentUser;
 
@@ -71,7 +72,9 @@ class AddJobBlock extends BlockBase implements ContainerFactoryPluginInterface {
    * @param AccountInterface $current_user
    * @param EntityTypeManagerInterface $entity_type_manager
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, CurrentPathStack $current_path, AliasManagerInterface $alias_manager, RouteMatchInterface $route_match, AccountInterface $current_user, EntityTypeManagerInterface $entity_type_manager) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition,
+   CurrentPathStack $current_path, AliasManagerInterface $alias_manager, RouteMatchInterface $route_match,
+   AccountInterface $current_user, EntityTypeManagerInterface $entity_type_manager) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->currentPath = $current_path;
     $this->aliasManager = $alias_manager;
@@ -94,7 +97,7 @@ class AddJobBlock extends BlockBase implements ContainerFactoryPluginInterface {
       $plugin_id,
       $plugin_definition,
       $container->get('path.current'),
-      $container->get('path.alias_manager'),
+      $container->get('path_alias.manager'),
       $container->get('current_route_match'),
       $container->get('current_user'),
       $container->get('entity_type.manager')

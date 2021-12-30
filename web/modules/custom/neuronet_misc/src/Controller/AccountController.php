@@ -23,7 +23,7 @@ class AccountController extends ControllerBase {
     $result = $query->fetchAll();
     $uid = $result[0]->entity_id;
     $user = User::load($uid);
-    $formObject = \Drupal::entityManager()
+    $formObject = \Drupal::entityTypeManager()
       ->getFormObject('user', 'default')
       ->setEntity($user);
     $form = \Drupal::formBuilder()->getForm($formObject);
@@ -51,6 +51,7 @@ class AccountController extends ControllerBase {
     $viewing_admin = FALSE;
     $viewing_user1 = FALSE;
     if (!empty($entities)) {
+      /** @var User $viewed_user */
       $viewed_user = reset($entities);
       $viewing_admin = $viewed_user->hasRole('administrator');
       $viewing_user1 = $viewed_user->id() === 1;

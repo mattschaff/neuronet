@@ -23,3 +23,7 @@ services:
       - '@entity_type.manager'
   neuronet_misc.refresh_fields:
     class: Drupal\neuronet_misc\Service\RefreshFields
+  http_middleware.neuronet_misc_redirect:
+    class: Drupal\neuronet_misc\Middleware\Redirect
+    tags:
+      - { name: http_middleware }

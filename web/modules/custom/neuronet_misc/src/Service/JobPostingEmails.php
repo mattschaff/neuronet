@@ -152,7 +152,7 @@ class JobPostingEmails {
     $store->delete('job_posting_recipients');
     $store->delete('job_posting_node');
     $response = new TrustedRedirectResponse($destination);
-    $response->send();
+    \Drupal::service('http_middleware.neuronet_misc_redirect')->setRedirectResponse($response);
     \Drupal::messenger()->addStatus(t('An email notification about \'@title\' has been sent to relevant NeuroNet community members.', ['@title' => $job->getTitle()]));
   }
 
@@ -160,6 +160,7 @@ class JobPostingEmails {
    * Sends email to the user associated w/ a profile nid
    *
    * @param integer $nid
+   * @param \Drupal\node\NodeInterface $job_node
    */
   public static function sendEmail($profile_nid, $job_node) {
     // Get user associated with the profile.
@@ -167,11 +168,13 @@ class JobPostingEmails {
       'field_profile' => $profile_nid,
     ]);
     // Make sure the user is active & allows emails.
+    /** @var \Drupal\user\UserInterface $user */
     if (
       ($user = reset($users)) &&
       (!$user->isBlocked()) &&
       ((int) $user->get('field_job_posting_emails')->value)
     ) {
+      /** @var \Drupal\node\NodeInterface $profile */
       $profile = \Drupal::entityTypeManager()->getStorage('node')->load($profile_nid);
       // Send email.
       /** @var MailManager $mail_manager */

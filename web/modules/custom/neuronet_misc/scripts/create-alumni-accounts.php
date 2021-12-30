@@ -3,6 +3,9 @@
 /**
  * @file
  * Create alumni accounts from CSV
+ * Runs as a Drush script.
+ * Looks like it only creates accounts for profiles that already exist.
+ * Probably not useful for the current setup and would be have to be updated for Drush 10.
  */
 
 use Drupal\Core\Entity\EntityInterface;

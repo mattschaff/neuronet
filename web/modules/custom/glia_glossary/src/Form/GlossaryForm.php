@@ -155,7 +155,9 @@ class GlossaryForm extends FormBase {
    */
   private function getGlossary(){
     $vid = 'glossary';
-    $terms =\Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid);
+    /** @var \Drupal\taxonomy\TermStorageInterface $term_storage */
+    $term_storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+    $terms = $term_storage->loadTree($vid);
     $glossary = [];
     foreach ($terms as $term) {
       $glossary[$term->name] = $term->description__value;

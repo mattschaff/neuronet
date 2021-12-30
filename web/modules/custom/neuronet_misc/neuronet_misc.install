@@ -71,6 +71,7 @@ function neuronet_misc_update_8001(&$sandbox) {
     ->orderBy('u.uid', 'ASC')
     ->execute();
   foreach ($result as $row) {
+    /** @var \Drupal\user\UserInterface $user */
     if ($user = \Drupal::entityTypeManager()->getStorage('user')->load($row->uid)) {
       $user->set('field_general_emails', true);
       $user->set('field_job_posting_emails', true);
@@ -139,8 +140,10 @@ function neuronet_misc_update_8002(&$sandbox) {
     ->execute();
   $entity_type_manager = \Drupal::entityTypeManager();
   foreach ($result as $row) {
+    /** @var \Drupal\user\UserInterface $user */
     if ($user = $entity_type_manager->getStorage('user')->load($row->uid)) {
       if (!$user->get('field_profile')->isEmpty()) {
+        /** @var \Drupal\node\NodeInterface $node */
         if ($node = $entity_type_manager->getStorage('node')->load($user->get('field_profile')->target_id)) {
           if (!$user->hasRole('alumni') && $node->get('field_exit_term')->isEmpty()) {
             $user->addRole('current_student');
@@ -240,6 +243,7 @@ function neuronet_misc_update_8005(&$sandbox) {
 function neuronet_misc_update_8006(&$sandbox) {
   $entity_batch_update = \Drupal::service('neuronet_misc.entity_batch_update');
   // Get & configure entity query for profiles
+  /** @var \Drupal\Core\Entity\Query\QueryInterface $query */
   $query = $entity_batch_update->getEntityQuery('node');
   $query = $query->condition('type', 'profile');
   // Set node-wise callback service
