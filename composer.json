@@ -45,7 +45,7 @@
         "drupal/core-recommended": "^8.8",
         "drupal/css_editor": "~1.0",
         "drupal/ctools": "~3.0",
-        "drupal/devel": "4.*",
+        "drupal/devel": "~4.0",
         "drupal/druadmin_lte_theme": "~1.0",
         "drupal/ds": "~3.0",
         "drupal/eleven": "~1.0",
@@ -71,7 +71,7 @@
         "drupal/twig_tweak": "~2.0",
         "drupal/views_bootstrap": "~3.0",
         "drupal/views_bulk_operations": "~3.0",
-        "drupal/views_distinct": "1.x-dev",
+        "drupal/views_distinct": "~1.0",
         "drupal/views_ef_fieldset": "~1.0",
         "drupal/views_field_view": "~1.0",
         "drush/drush": "~10.0"
@@ -84,7 +84,13 @@
     "config": {
         "preferred-install": "source",
         "sort-packages": true,
-	"process-timeout": 1200
+	"process-timeout": 1200,
+        "allow-plugins": {
+            "composer/installers": true,
+            "cweagans/composer-patches": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/core-project-message": true
+        }
     },
     "scripts": {
         "pre-drupal-scaffold-cmd": [
