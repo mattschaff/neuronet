@@ -9,6 +9,7 @@ dependencies:
     - field.field.node.profile.field_alma_mater
     - field.field.node.profile.field_alumni
     - field.field.node.profile.field_candidacy_
+    - field.field.node.profile.field_certificate_programs
     - field.field.node.profile.field_classes_taken
     - field.field.node.profile.field_curriculum_vitae
     - field.field.node.profile.field_degree
@@ -64,6 +65,7 @@ hidden:
   feeds_item: true
   field_alma_mater: true
   field_candidacy_: true
+  field_certificate_programs: true
   field_classes_taken: true
   field_curriculum_vitae: true
   field_degree: true

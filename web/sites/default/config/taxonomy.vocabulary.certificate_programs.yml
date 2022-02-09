@@ -1,0 +1,8 @@
+uuid: e1cfd639-cc32-4bef-95f0-a78d93e9ed24
+langcode: en
+status: true
+dependencies: {  }
+name: 'Certificate Programs'
+vid: certificate_programs
+description: 'Certificates obtained from Penn in conjunction with graduate degree'
+weight: 0

@@ -1,0 +1,29 @@
+uuid: 212feff6-b1c4-451f-8c89-6362ea973357
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_certificate_programs
+    - node.type.profile
+    - taxonomy.vocabulary.certificate_programs
+id: node.profile.field_certificate_programs
+field_name: field_certificate_programs
+entity_type: node
+bundle: profile
+label: 'Certificate Programs'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      certificate_programs: certificate_programs
+    sort:
+      field: name
+      direction: asc
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference
