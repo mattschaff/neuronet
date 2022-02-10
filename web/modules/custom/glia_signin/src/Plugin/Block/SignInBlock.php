@@ -5,7 +5,7 @@ namespace Drupal\glia_signin\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Component\Utility\UrlHelper;
-use Drupal\Core\Url;
+
 
 /**
  * Provides a 'GLIA Sign-in' block.
@@ -32,7 +32,7 @@ class SignInBlock extends BlockBase {
       $pennKey = $_SERVER['REDIRECT_REMOTE_USER'];
     } else {
       echo 'Failed to find Penn Key';
-      throw new RuntimeException('PennKey not found on server.');
+      throw new \RuntimeException('PennKey not found on server.');
     }
 
     $form = \Drupal::formBuilder()->getForm('Drupal\glia_signin\Form\SignInForm', $endpoint, $pennKey);
