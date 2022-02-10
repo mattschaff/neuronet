@@ -26,10 +26,16 @@ class SignInBlock extends BlockBase {
     $config = $this->getConfiguration();
     $endpoint = $config['signin_block_url'];
     // Shibboleth variables
-    $pennKey = $_SERVER['REMOTE_USER'];
-    $fullName = $_SERVER['givenName'] . ' ' . $_SERVER['sn'];
+    if (isset($_SERVER['REMOTE_USER'])) {
+      $pennKey = $_SERVER['REMOTE_USER'];
+    } elseif (isset($_SERVER['REDIRECT_REMOTE_USER'])) {
+      $pennKey = $_SERVER['REDIRECT_REMOTE_USER'];
+    } else {
+      echo 'Failed to find Penn Key';
+      throw new RuntimeException('PennKey not found on server.');
+    }
 
-    $form = \Drupal::formBuilder()->getForm('Drupal\glia_signin\Form\SignInForm', $endpoint, $pennKey, $fullName);
+    $form = \Drupal::formBuilder()->getForm('Drupal\glia_signin\Form\SignInForm', $endpoint, $pennKey);
     return $form;
   }
 

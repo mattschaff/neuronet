@@ -35,7 +35,7 @@ class SignInForm extends FormBase {
     ];
     $form['fullname'] = [
       '#type' => 'hidden',
-      '#value' => $fullName,
+      '#value' => $fullName ?? '',
     ];
 
     $form['signInButton'] = [
@@ -90,9 +90,15 @@ class SignInForm extends FormBase {
     }
 
     $resultInfo['#type'] = 'container';
-    $resultInfo['header'] = [
-      '#markup' => '<h2>' . t('Hi, <strong>@name</strong>!', ['@name' => $signinData['name']]) . '</h2>',
-    ];
+    if ($signinData['name']) {
+      $resultInfo['header'] = [
+        '#markup' => '<h2>' . t('Hi, <strong>@name</strong>!', ['@name' => $signinData['name']]) . '</h2>',
+      ];
+    } else {
+      $resultInfo['header'] = [
+        '#markup' => '<h2>' . t('Hello!') . '</h2>',
+      ];
+    }
     $resultInfo['status'] = [
       '#markup' => '<p>' . $statusLine . '</p>',
     ];
