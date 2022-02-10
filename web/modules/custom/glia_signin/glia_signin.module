@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * @file
+ * Contains glia_signin.module.
+ *
+ * - The contents of this file are solely Drupal procedural hooks.
+ */

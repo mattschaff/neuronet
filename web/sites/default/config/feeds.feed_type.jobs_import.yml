@@ -39,6 +39,7 @@ processor_configuration:
     type: job
   update_non_existent: _keep
   langcode: en
+  insert_new: 1
 custom_sources:
   11:
     label: '11'

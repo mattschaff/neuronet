@@ -1,0 +1,12 @@
+uuid: 71179abe-958e-449e-9f1d-5145a515e9f2
+langcode: en
+status: true
+dependencies: {  }
+id: glia_meeting_sign_in
+label: 'GLIA Meeting Sign-in'
+description: ''
+use_admin_theme: false
+path: /secure/glia-sign-in
+access_logic: and
+access_conditions: {  }
+parameters: {  }

@@ -38,6 +38,7 @@ processor_configuration:
     type: profile
   update_non_existent: _keep
   langcode: en
+  insert_new: 1
 custom_sources:
   '':
     label: ''

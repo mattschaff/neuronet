@@ -32,5 +32,6 @@ hidden:
   field_links: true
   field_salary_high: true
   field_salary_low: true
+  field_send_email_notifications: true
   field_stage: true
   field_start_date: true

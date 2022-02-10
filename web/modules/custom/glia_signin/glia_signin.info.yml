@@ -1,0 +1,7 @@
+name: GLIA Meeting Sign-in
+description: Provides a block that allows NGG students to sign into GLIA meetings, displays their GLIA member information and allows them to update information using a Google Form.
+package: NeuroNet
+
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
