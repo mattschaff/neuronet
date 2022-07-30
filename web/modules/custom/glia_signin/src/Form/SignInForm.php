@@ -142,11 +142,11 @@ class SignInForm extends FormBase {
         ];
       } elseif ($resultInfo['goodActivityStanding']) {
         $resultInfo['activityStanding'] = [
-          '#markup' => '<p class="text-success">' . t('You have been involved with at least 2 activities this year.') . '</p>',
+          '#markup' => '<p class="text-success">' . t('You have been involved with at least 1 activity this year.') . '</p>',
         ];
       } else {
         $resultInfo['activityStanding'] = [
-          '#markup' => '<p>' . t('You may not yet have been involved with at least 2 activities this year.') . '</p>',
+          '#markup' => '<p>' . t('You may not yet have been involved with at least 1 activity this year.') . '</p>',
         ];
         $goodActivityStanding = FALSE;
       }
