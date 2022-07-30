@@ -2,7 +2,7 @@ name: Eleven
 type: theme
 description: 'Admin Theme that goes to 11'
 base theme: elevenfeat # Seperated the Front End Admin Tools.
-# core: '8.x'
+core: '8.x'
 screenshot: goes-to-eleven.jpg
 
 # -- regions -------------------------------------------------------------------
@@ -203,9 +203,3 @@ stylesheets-remove:
   - core/themes/stable/css/system/components/fieldgroup.module.css
   - core/themes/stable/css/user/user.admin.css
   - profiles/thunder/modules/thunder_article/css/article-form.css
-
-# Information added by Drupal.org packaging script on 2018-02-21
-version: '8.x-1.0-beta5'
-core: '8.x'
-project: 'eleven'
-datestamp: 1519242198

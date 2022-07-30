@@ -3,7 +3,7 @@ type: theme
 description: 'theme made for testing FEAT eleven theme'
 base theme: elevenfeat # grap the eleven feat theme elements.
 
-# core: '8.x'
+core: '8.x'
 
 # Test that this work even if we remove all the libraries
 # libraries-override:
@@ -14,9 +14,3 @@ base theme: elevenfeat # grap the eleven feat theme elements.
 # so it can be picked up in the backend as well
 ckeditor_stylesheets:
   - ckeditoriframe.css
-
-# Information added by Drupal.org packaging script on 2018-02-21
-version: '8.x-1.0-beta5'
-core: '8.x'
-project: 'eleven'
-datestamp: 1519242198

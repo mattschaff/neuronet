@@ -2,7 +2,7 @@ name: eleven Front End Amin Tools
 type: theme
 description: 'eleven FEAT - Seperation of the FrontEnd Admin Tools for the Eleven theme'
 base theme: classy
-# core: '8.x'
+core: '8.x'
 
 hidden: TRUE
 
@@ -148,9 +148,3 @@ libraries-override:
     css:
       theme:
         css/node.preview.css: templates/node-preview/nodepreview.css
-
-# Information added by Drupal.org packaging script on 2018-02-21
-version: '8.x-1.0-beta5'
-core: '8.x'
-project: 'eleven'
-datestamp: 1519242198

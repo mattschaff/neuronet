@@ -4,3 +4,8 @@ description: 'Generates source files.'
 package: Testing
 dependencies:
   - feeds
+
+# Information added by Drupal.org packaging script on 2022-07-16
+version: '8.x-3.0-beta2'
+project: 'feeds'
+datestamp: 1657972707

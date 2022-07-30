@@ -1,12 +1,12 @@
 <?php
 
-namespace Drupal\Tests\feeds\Unit\Zend\Extension\Georss;
+namespace Drupal\Tests\feeds\Unit\Laminas\Extension\Georss;
 
 use Drupal\Tests\feeds\Unit\FeedsUnitTestCase;
-use Drupal\feeds\Zend\Extension\Georss\Entry;
+use Drupal\feeds\Laminas\Extension\Georss\Entry;
 
 /**
- * @coversDefaultClass \Drupal\feeds\Zend\Extension\Georss\Entry
+ * @coversDefaultClass \Drupal\feeds\Laminas\Extension\Georss\Entry
  * @group feeds
  */
 class EntryTest extends FeedsUnitTestCase {

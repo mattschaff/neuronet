@@ -74,7 +74,8 @@ use Drupal\user\UserInterface;
  *     "edit-form" = "/feed/{feeds_feed}/edit",
  *     "import-form" = "/feed/{feeds_feed}/import",
  *     "schedule-import-form" = "/feed/{feeds_feed}/schedule-import",
- *     "clear-form" = "/feed/{feeds_feed}/delete-items"
+ *     "clear-form" = "/feed/{feeds_feed}/delete-items",
+ *     "unlock" = "/feed/{feeds_feed}/unlock",
  *   }
  * )
  */
@@ -561,6 +562,9 @@ class Feed extends ContentEntityBase implements FeedInterface {
       // Grab the first feed to get its type.
       $feed = reset($group);
       try {
+        // Clear all state objects for the feed.
+        $feed->clearStates();
+
         foreach ($feed->getType()->getPlugins() as $plugin) {
           $plugin->onFeedDeleteMultiple($group);
         }
@@ -721,7 +725,8 @@ class Feed extends ContentEntityBase implements FeedInterface {
         'label' => 'inline',
         'type' => 'number_integer',
         'weight' => 0,
-      ]);
+      ])
+      ->setDisplayConfigurable('view', TRUE);
 
     return $fields;
   }

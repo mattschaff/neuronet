@@ -1,10 +1,4 @@
 name: eleven form suggestions
 description: Provides the form id for form template suggestions
 type: module
-# core: '8.x'
-
-# Information added by Drupal.org packaging script on 2018-02-21
-version: '8.x-1.0-beta5'
 core: '8.x'
-project: 'eleven'
-datestamp: 1519242198

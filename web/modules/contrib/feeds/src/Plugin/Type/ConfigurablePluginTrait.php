@@ -3,12 +3,11 @@
 namespace Drupal\feeds\Plugin\Type;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Plugin\PluginFormInterface;
 
 /**
- * Base class for Feeds plugins that have configuration forms.
+ * Trait to provide configurable plugin methods.
  */
-abstract class ConfigurablePluginBase extends PluginBase implements PluginFormInterface {
+trait ConfigurablePluginTrait {
 
   /**
    * {@inheritdoc}
