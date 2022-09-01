@@ -6,8 +6,3 @@ core_version_requirement: '^8 || ^9'
 package: Layout
 dependencies:
   - drupal:layout_discovery
-
-# Information added by Drupal.org packaging script on 2020-06-05
-version: '8.x-5.2'
-project: 'bootstrap_layouts'
-datestamp: 1591360018

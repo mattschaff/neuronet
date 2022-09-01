@@ -6,8 +6,3 @@ type: module
 package: Views
 dependencies:
  - drupal:views
-
-# Information added by Drupal.org packaging script on 2020-11-05
-version: '8.x-1.5'
-project: 'views_ef_fieldset'
-datestamp: 1604567513

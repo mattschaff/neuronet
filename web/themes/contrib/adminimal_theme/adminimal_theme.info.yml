@@ -26,8 +26,3 @@ regions:
   sidebar_first: 'First sidebar'
 regions_hidden:
   - sidebar_first
-
-# Information added by Drupal.org packaging script on 2020-10-06
-version: '8.x-1.6'
-project: 'adminimal_theme'
-datestamp: 1602006939

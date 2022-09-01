@@ -7,8 +7,3 @@ configure: adminimal_admin_toolbar.settings
 type: module
 dependencies:
   - admin_toolbar:admin_toolbar
-
-# Information added by Drupal.org packaging script on 2020-04-28
-version: '8.x-1.11'
-project: 'adminimal_admin_toolbar'
-datestamp: 1588102633

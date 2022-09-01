@@ -7,8 +7,3 @@ configure: config_update.report
 dependencies:
   - config_update:config_update
   - drupal:config
-
-# Information added by Drupal.org packaging script on 2020-04-08
-version: '8.x-1.7'
-project: 'config_update'
-datestamp: 1586355588
