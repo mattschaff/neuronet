@@ -40,10 +40,12 @@ if (defined('MED_SERVER') && constant('MED_SERVER') && php_sapi_name() !== 'cli'
   $primary_domain = 'www.neuronetupenn.org';
   $requires_redirect = FALSE;
 
+/*
   if ($_SERVER['HTTP_HOST'] !== $primary_domain) {
     $requires_redirect = TRUE;
     $redirect_path = $_SERVER['REQUEST_URI'];
   }
+*/
 
   if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === 'off'
       && $_SERVER['SERVER_PORT'] === 80) {
@@ -59,6 +61,7 @@ if (defined('MED_SERVER') && constant('MED_SERVER') && php_sapi_name() !== 'cli'
 
   // Drupal 8 Trusted Host Settings
   if (is_array($settings)) {
-    $settings['trusted_host_patterns'] = array('^' . preg_quote($primary_domain) . '$');
+    $settings['trusted_host_patterns'] = array('^' . preg_quote($primary_domain) . '$',
+'^' . preg_quote('hosting2.pmacs.upenn.edu') . '$');
   }
 }
