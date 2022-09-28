@@ -2508,16 +2508,16 @@
         },
         {
             "name": "drupal/core",
-            "version": "9.3.21",
+            "version": "9.3.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core.git",
-                "reference": "b32e65a1ebc76c24f6036924274d21c222e350ef"
+                "reference": "c98b90e8e360b18d1e8c34c122689d556aaf671f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core/zipball/b32e65a1ebc76c24f6036924274d21c222e350ef",
-                "reference": "b32e65a1ebc76c24f6036924274d21c222e350ef",
+                "url": "https://api.github.com/repos/drupal/core/zipball/c98b90e8e360b18d1e8c34c122689d556aaf671f",
+                "reference": "c98b90e8e360b18d1e8c34c122689d556aaf671f",
                 "shasum": ""
             },
             "require": {
@@ -2563,7 +2563,7 @@
                 "symfony/translation": "^4.4",
                 "symfony/validator": "^4.4",
                 "symfony/yaml": "^4.4.19",
-                "twig/twig": "^2.12.0",
+                "twig/twig": "^2.15.3",
                 "typo3/phar-stream-wrapper": "^3.1.3"
             },
             "conflict": {
@@ -2759,13 +2759,13 @@
             ],
             "description": "Drupal is an open source content management platform powering millions of websites and applications.",
             "support": {
-                "source": "https://github.com/drupal/core/tree/9.3.21"
+                "source": "https://github.com/drupal/core/tree/9.3.22"
             },
-            "time": "2022-08-03T16:34:49+00:00"
+            "time": "2022-09-28T16:19:54+00:00"
         },
         {
             "name": "drupal/core-composer-scaffold",
-            "version": "9.3.21",
+            "version": "9.3.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-composer-scaffold.git",
@@ -2809,7 +2809,7 @@
                 "drupal"
             ],
             "support": {
-                "source": "https://github.com/drupal/core-composer-scaffold/tree/9.3.21"
+                "source": "https://github.com/drupal/core-composer-scaffold/tree/9.3.22"
             },
             "time": "2022-02-24T17:40:56+00:00"
         },
@@ -2856,16 +2856,16 @@
         },
         {
             "name": "drupal/core-recommended",
-            "version": "9.3.21",
+            "version": "9.3.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/drupal/core-recommended.git",
-                "reference": "ed55850d6c38bf6dbd82561ff81a12a08974b098"
+                "reference": "2ffe4cbbe69e3772e2fef3102c1d48fae2a6c724"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/drupal/core-recommended/zipball/ed55850d6c38bf6dbd82561ff81a12a08974b098",
-                "reference": "ed55850d6c38bf6dbd82561ff81a12a08974b098",
+                "url": "https://api.github.com/repos/drupal/core-recommended/zipball/2ffe4cbbe69e3772e2fef3102c1d48fae2a6c724",
+                "reference": "2ffe4cbbe69e3772e2fef3102c1d48fae2a6c724",
                 "shasum": ""
             },
             "require": {
@@ -2874,7 +2874,7 @@
                 "doctrine/annotations": "1.13.2",
                 "doctrine/lexer": "1.2.1",
                 "doctrine/reflection": "1.2.2",
-                "drupal/core": "9.3.21",
+                "drupal/core": "9.3.22",
                 "egulias/email-validator": "3.1.2",
                 "guzzlehttp/guzzle": "6.5.8",
                 "guzzlehttp/promises": "1.5.1",
@@ -2923,7 +2923,7 @@
                 "symfony/validator": "v4.4.35",
                 "symfony/var-dumper": "v5.4.0",
                 "symfony/yaml": "v4.4.34",
-                "twig/twig": "v2.14.11",
+                "twig/twig": "v2.15.3",
                 "typo3/phar-stream-wrapper": "v3.1.7"
             },
             "conflict": {
@@ -2936,9 +2936,9 @@
             ],
             "description": "Locked core dependencies; require this project INSTEAD OF drupal/core.",
             "support": {
-                "source": "https://github.com/drupal/core-recommended/tree/9.3.21"
+                "source": "https://github.com/drupal/core-recommended/tree/9.3.22"
             },
-            "time": "2022-08-03T16:34:49+00:00"
+            "time": "2022-09-28T16:19:54+00:00"
         },
         {
             "name": "drupal/css_editor",
@@ -9502,16 +9502,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v2.14.11",
+            "version": "v2.15.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "66baa66f29ee30e487e05f1679903e36eb01d727"
+                "reference": "ab402673db8746cb3a4c46f3869d6253699f614a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/66baa66f29ee30e487e05f1679903e36eb01d727",
-                "reference": "66baa66f29ee30e487e05f1679903e36eb01d727",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ab402673db8746cb3a4c46f3869d6253699f614a",
+                "reference": "ab402673db8746cb3a4c46f3869d6253699f614a",
                 "shasum": ""
             },
             "require": {
@@ -9527,7 +9527,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.14-dev"
+                    "dev-master": "2.15-dev"
                 }
             },
             "autoload": {
@@ -9566,7 +9566,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v2.14.11"
+                "source": "https://github.com/twigphp/Twig/tree/v2.15.3"
             },
             "funding": [
                 {
@@ -9578,7 +9578,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-02-04T06:57:25+00:00"
+            "time": "2022-09-28T08:40:08+00:00"
         },
         {
             "name": "typo3/phar-stream-wrapper",
