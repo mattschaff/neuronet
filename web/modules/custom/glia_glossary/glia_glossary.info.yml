@@ -2,4 +2,5 @@ name: Glossary-BnB Transform
 type: module
 description: Intercalates glossary terms within the text of Brains in Briefs articles
 core: 8.x
+core_version_requirement: ^8 || ^9
 package: Custom

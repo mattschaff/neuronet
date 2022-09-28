@@ -1,0 +1,157 @@
+uuid: 075fd3d5-cbcd-4b2b-84a6-b085d6accea2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.profile.field_degree
+    - field.field.node.profile.field_entry_term
+    - field.field.node.profile.field_exit_term
+    - field.field.node.profile.field_first_name
+    - field.field.node.profile.field_grad_group
+    - field.field.node.profile.field_last_name
+    - node.type.profile
+  module:
+    - node
+label: 'Alumnus Profile Import'
+id: alumnus_profile_import
+description: ''
+help: null
+import_period: -1
+fetcher: upload
+fetcher_configuration:
+  allowed_extensions: 'txt csv tsv xml opml'
+  directory: 'private://feeds'
+parser: csv
+parser_configuration:
+  delimiter: ','
+  no_headers: true
+  line_limit: 100
+processor: 'entity:node'
+processor_configuration:
+  values:
+    type: profile
+  langcode: en
+  insert_new: 1
+  update_existing: 0
+  update_non_existent: _keep
+  skip_hash_check: false
+  authorize: true
+  expire: -1
+  owner_feed_author: true
+  owner_id: 0
+custom_sources:
+  '':
+    value: ''
+    label: ''
+    machine_name: ''
+    type: csv
+  entry_term:
+    value: 'Entry Term'
+    label: 'Entry Term'
+    machine_name: entry_term
+    type: csv
+  title:
+    value: Title
+    label: Title
+    machine_name: title
+    type: csv
+  exit_term:
+    value: 'Exit Term'
+    label: 'Exit Term'
+    machine_name: exit_term
+    type: csv
+  first_name:
+    value: 'First Name'
+    label: 'First Name'
+    machine_name: first_name
+    type: csv
+  last_name:
+    value: 'Last Name'
+    label: 'Last Name'
+    machine_name: last_name
+    type: csv
+  grad_group:
+    value: 'Grad Group'
+    label: 'Grad Group'
+    machine_name: grad_group
+    type: csv
+  1:
+    value: '1'
+    label: '1'
+    machine_name: '1'
+    type: csv
+  0:
+    value: '0'
+    label: '0'
+    machine_name: '0'
+    type: csv
+  3:
+    value: '3'
+    label: '3'
+    machine_name: '3'
+    type: csv
+  2:
+    value: '2'
+    label: '2'
+    machine_name: '2'
+    type: csv
+  4:
+    value: '4'
+    label: '4'
+    machine_name: '4'
+    type: csv
+  5:
+    value: '5'
+    label: '5'
+    machine_name: '5'
+    type: csv
+  6:
+    value: '6'
+    label: '6'
+    machine_name: '6'
+    type: csv
+mappings:
+  -
+    target: title
+    map:
+      value: '1'
+    unique:
+      value: '1'
+  -
+    target: field_grad_group
+    map:
+      target_id: '0'
+    settings:
+      reference_by: name
+      autocreate: 0
+  -
+    target: field_first_name
+    map:
+      value: '3'
+    unique: {  }
+  -
+    target: field_last_name
+    map:
+      value: '2'
+    unique: {  }
+  -
+    target: field_degree
+    map:
+      target_id: '4'
+    settings:
+      reference_by: name
+      autocreate: false
+  -
+    target: field_entry_term
+    map:
+      target_id: '5'
+    settings:
+      reference_by: name
+      autocreate: false
+  -
+    target: field_exit_term
+    map:
+      target_id: '6'
+    settings:
+      reference_by: name
+      autocreate: false

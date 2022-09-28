@@ -1,0 +1,45 @@
+uuid: 3e216132-11e0-4695-9238-6c608ea6d78e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.user.user.field_general_emails
+    - field.field.user.user.field_job_posting_emails
+    - field.field.user.user.field_profile
+    - field.field.user.user.user_picture
+    - image.style.thumbnail
+  module:
+    - image
+    - user
+_core:
+  default_config_hash: V51QPCKkgNREKtSmB9Iu2wmAMEpktVpnzklWaZV8UYo
+id: user.user.default
+targetEntityType: user
+bundle: user
+mode: default
+content:
+  field_profile:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  member_for:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  user_picture:
+    type: image
+    label: hidden
+    settings:
+      image_link: content
+      image_style: thumbnail
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  field_general_emails: true
+  field_job_posting_emails: true

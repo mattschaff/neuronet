@@ -1,0 +1,14 @@
+_core:
+  default_config_hash: 7mRdLbI-Rda0ePrw4IkNSJd8m_lTx7nLZnVfbNbyfwA
+name: NeuroNet
+mail: neuronet.glia@gmail.com
+simple_address: false
+sitestyle: true
+textonly: false
+linkonly: false
+format: full_html
+preserve_class: false
+advanced:
+  incoming: false
+  key: BGDz5kQHBlCnTK8OuiU78WE4D7YP1CevfvaqDLNEIbs
+engine: mimemail

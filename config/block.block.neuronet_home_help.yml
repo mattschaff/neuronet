@@ -1,0 +1,22 @@
+uuid: 1d6bf1d2-7bce-4cd4-b40d-b9e7ee6233f9
+langcode: en
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - neuronet_home
+_core:
+  default_config_hash: MhtNdV__HKRTab0ZPjkPNfYL4Ng4UPBucDLoC7Rg5Eo
+id: neuronet_home_help
+theme: neuronet_home
+region: help
+weight: -7
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Help
+  label_display: '0'
+  provider: help
+visibility: {  }

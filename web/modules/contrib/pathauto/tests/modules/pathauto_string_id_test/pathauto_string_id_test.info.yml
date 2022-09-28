@@ -1,6 +1,5 @@
 name: 'Pathauto testing module'
 type: module
-core_version_requirement: ^8.8 || ^9
 description: 'Pathauto for Entity with string ID.'
 package: Testing
 dependencies:

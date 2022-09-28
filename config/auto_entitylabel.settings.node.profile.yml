@@ -1,0 +1,10 @@
+status: 1
+pattern: '[node:field_preferred_first_name_comp] [node:field_last_name]'
+escape: false
+preserve_titles: false
+dependencies:
+  config:
+    - node.type.profile
+php: 0
+save: 1
+chunk: '50'

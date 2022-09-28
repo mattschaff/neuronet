@@ -1,0 +1,671 @@
+uuid: 4c06d358-574b-4842-9f42-a0804009b433
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.profile.body
+    - field.field.node.profile.feeds_item
+    - field.field.node.profile.field_alma_mater
+    - field.field.node.profile.field_alumni
+    - field.field.node.profile.field_candidacy_
+    - field.field.node.profile.field_certificate_programs
+    - field.field.node.profile.field_classes_taken
+    - field.field.node.profile.field_curriculum_vitae
+    - field.field.node.profile.field_degree
+    - field.field.node.profile.field_degree_pursued
+    - field.field.node.profile.field_email
+    - field.field.node.profile.field_entry_term
+    - field.field.node.profile.field_exit_term
+    - field.field.node.profile.field_fellowships_training_grant
+    - field.field.node.profile.field_first_name
+    - field.field.node.profile.field_grad_group
+    - field.field.node.profile.field_help_with
+    - field.field.node.profile.field_hometown_s_
+    - field.field.node.profile.field_journal_club
+    - field.field.node.profile.field_lab_rotations
+    - field.field.node.profile.field_last_name
+    - field.field.node.profile.field_links
+    - field.field.node.profile.field_links2
+    - field.field.node.profile.field_locations_lived
+    - field.field.node.profile.field_matriculation_year
+    - field.field.node.profile.field_neuroscience_interests
+    - field.field.node.profile.field_ngg_activities
+    - field.field.node.profile.field_non_ngg_activities
+    - field.field.node.profile.field_preferred_first_name_comp
+    - field.field.node.profile.field_preferred_prefix
+    - field.field.node.profile.field_preferred_pronouns
+    - field.field.node.profile.field_profile_image
+    - field.field.node.profile.field_research_area
+    - field.field.node.profile.field_show_to_alumni
+    - field.field.node.profile.field_show_to_students
+    - field.field.node.profile.field_thesis_committee
+    - field.field.node.profile.field_thesis_lab
+    - field.field.node.profile.field_undergraduate_major
+    - image.style.thumbnail
+    - node.type.profile
+  module:
+    - computed_field
+    - conditional_fields
+    - field_group
+    - file
+    - image
+    - link
+    - path
+    - text
+third_party_settings:
+  field_group:
+    group_student_details:
+      children:
+        - field_undergraduate_major
+        - field_alma_mater
+        - field_hometown_s_
+        - field_degree_pursued
+        - field_matriculation_year
+        - field_lab_rotations
+        - field_candidacy_
+        - field_thesis_committee
+        - field_journal_club
+        - field_fellowships_training_grant
+        - field_certificate_programs
+        - field_classes_taken
+        - field_ngg_activities
+        - field_non_ngg_activities
+        - field_locations_lived
+      label: 'Student Details'
+      region: content
+      parent_name: group_profile
+      weight: 10
+      format_type: tab
+      format_settings:
+        classes: ''
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_general_information:
+      children:
+        - title
+        - field_first_name
+        - field_last_name
+        - field_preferred_prefix
+        - field_preferred_first_name_comp
+        - field_preferred_pronouns
+        - field_email
+        - field_profile_image
+        - field_thesis_lab
+        - field_neuroscience_interests
+        - body
+        - field_links
+        - field_links2
+        - field_curriculum_vitae
+      label: 'General Information'
+      region: content
+      parent_name: group_profile
+      weight: 9
+      format_type: tab
+      format_settings:
+        classes: ''
+        id: ''
+        formatter: closed
+        description: ''
+        required_fields: true
+    group_profile:
+      children:
+        - group_general_information
+        - group_student_details
+        - group_alumn
+      label: Profile
+      region: content
+      parent_name: ''
+      weight: 0
+      format_type: tabs
+      format_settings:
+        classes: ''
+        id: ''
+        direction: vertical
+    group_alumn:
+      children:
+        - field_alumni
+        - field_show_to_students
+        - field_show_to_alumni
+        - field_grad_group
+        - field_degree
+        - field_entry_term
+        - field_exit_term
+        - field_research_area
+        - field_help_with
+      label: Alumni
+      region: content
+      parent_name: group_profile
+      weight: 12
+      format_type: tab
+      format_settings:
+        classes: ''
+        id: ''
+        formatter: open
+        description: ''
+        required_fields: true
+id: node.profile.default
+targetEntityType: node
+bundle: profile
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 12
+    region: content
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+      show_summary: false
+    third_party_settings: {  }
+  created:
+    type: datetime_timestamp
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_alma_mater:
+    type: entity_reference_autocomplete
+    weight: 20
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_alumni:
+    type: boolean_checkbox
+    weight: 10
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  field_candidacy_:
+    type: entity_reference_autocomplete
+    weight: 25
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_certificate_programs:
+    type: entity_reference_autocomplete
+    weight: 29
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_classes_taken:
+    type: entity_reference_autocomplete
+    weight: 30
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_curriculum_vitae:
+    type: file_generic
+    weight: 15
+    region: content
+    settings:
+      progress_indicator: throbber
+    third_party_settings: {  }
+  field_degree:
+    type: entity_reference_autocomplete
+    weight: 14
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        e78a474e-7b6d-4fe5-8b9e-974137edbece:
+          entity_type: node
+          bundle: profile
+          dependee: field_alumni
+          settings:
+            state: visible
+            condition: checked
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form: {  }
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_degree_pursued:
+    type: options_select
+    weight: 22
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_email:
+    type: email_default
+    weight: 8
+    region: content
+    settings:
+      placeholder: ''
+      size: 60
+    third_party_settings: {  }
+  field_entry_term:
+    type: entity_reference_autocomplete
+    weight: 15
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        d4f80cf8-5ee2-4244-9338-83105a4cb78a:
+          entity_type: node
+          bundle: profile
+          dependee: field_alumni
+          settings:
+            state: visible
+            condition: checked
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form: {  }
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_exit_term:
+    type: entity_reference_autocomplete
+    weight: 16
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        00323bc6-0d5e-40d1-9cca-65de3027bcd1:
+          entity_type: node
+          bundle: profile
+          dependee: field_alumni
+          settings:
+            state: visible
+            condition: checked
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form: {  }
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_fellowships_training_grant:
+    type: entity_reference_autocomplete
+    weight: 28
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_first_name:
+    type: string_textfield
+    weight: 3
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_grad_group:
+    type: options_buttons
+    weight: 13
+    region: content
+    settings: {  }
+    third_party_settings:
+      conditional_fields:
+        b8a0e1cf-3e90-493c-babd-a9132c5e104e:
+          entity_type: node
+          bundle: profile
+          dependee: field_alumni
+          settings:
+            state: visible
+            condition: checked
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form: {  }
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_help_with:
+    type: entity_reference_autocomplete
+    weight: 18
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        41ac7606-e6aa-4b8e-acac-a73253ecef0b:
+          entity_type: node
+          bundle: profile
+          dependee: field_alumni
+          settings:
+            state: visible
+            condition: checked
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form: {  }
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_hometown_s_:
+    type: string_textfield
+    weight: 21
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_journal_club:
+    type: entity_reference_autocomplete
+    weight: 27
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_lab_rotations:
+    type: entity_reference_autocomplete
+    weight: 24
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_last_name:
+    type: string_textfield
+    weight: 4
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_links:
+    type: link_default
+    weight: 13
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings:
+      conditional_fields:
+        702f6058-442c-44a0-896c-2b377004e280:
+          entity_type: node
+          bundle: profile
+          dependee: field_alumni
+          settings:
+            state: visible
+            condition: checked
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form: {  }
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_links2:
+    type: link_default
+    weight: 14
+    region: content
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_locations_lived:
+    type: options_select
+    weight: 33
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_matriculation_year:
+    type: entity_reference_autocomplete
+    weight: 23
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_neuroscience_interests:
+    type: entity_reference_autocomplete
+    weight: 11
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_ngg_activities:
+    type: entity_reference_autocomplete
+    weight: 31
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_non_ngg_activities:
+    type: string_textarea
+    weight: 32
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_preferred_first_name_comp:
+    type: computed_string_widget
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_preferred_prefix:
+    type: string_textfield
+    weight: 5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_preferred_pronouns:
+    type: options_select
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_profile_image:
+    type: image_image
+    weight: 9
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+  field_research_area:
+    type: entity_reference_autocomplete
+    weight: 17
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings:
+      conditional_fields:
+        81409ec2-30f5-4989-8a6e-965bd91ff624:
+          entity_type: node
+          bundle: profile
+          dependee: field_alumni
+          settings:
+            state: visible
+            condition: checked
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form: {  }
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_show_to_alumni:
+    type: boolean_checkbox
+    weight: 12
+    region: content
+    settings:
+      display_label: true
+    third_party_settings:
+      conditional_fields:
+        fe046973-ada6-4e92-8a70-59b3ac7b5778:
+          entity_type: node
+          bundle: profile
+          dependee: field_alumni
+          settings:
+            state: visible
+            condition: checked
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              value: false
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_show_to_students:
+    type: boolean_checkbox
+    weight: 11
+    region: content
+    settings:
+      display_label: true
+    third_party_settings:
+      conditional_fields:
+        14ff9b50-6d56-49dd-a381-1ad6b909bab9:
+          entity_type: node
+          bundle: profile
+          dependee: field_alumni
+          settings:
+            state: visible
+            condition: checked
+            grouping: AND
+            values_set: 1
+            value: ''
+            values: {  }
+            value_form:
+              value: false
+            effect: show
+            effect_options: {  }
+            selector: ''
+  field_thesis_committee:
+    type: entity_reference_autocomplete
+    weight: 26
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_thesis_lab:
+    type: entity_reference_autocomplete
+    weight: 10
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  field_undergraduate_major:
+    type: entity_reference_autocomplete
+    weight: 19
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  promote:
+    type: boolean_checkbox
+    weight: 3
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 6
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  sticky:
+    type: boolean_checkbox
+    weight: 4
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 2
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 1
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  feeds_item: true

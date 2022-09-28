@@ -1,11 +1,10 @@
 type: module
 name: 'Display Suite'
 description: 'Extend the display options for every entity type.'
-core_version_requirement: ^8.8 || ^9
+core_version_requirement: ^9 || ^10
 package: 'Display Suite'
 configure: ds.structure
 dependencies:
   - drupal:layout_discovery
-  - drupal:system (>= 8.6.x)
 test_dependencies:
-  - field_group:field_group
+  - classy:classy

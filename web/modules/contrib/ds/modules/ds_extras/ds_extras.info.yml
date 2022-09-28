@@ -1,7 +1,7 @@
 type: module
 name: 'Display Suite Extras'
 description: 'Contains additional features for Display Suite.'
-core_version_requirement: ^8.8 || ^9
+core_version_requirement: ^9 || ^10
 package: 'Display Suite'
 configure: admin/structure/ds/settings
 dependencies:

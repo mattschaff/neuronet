@@ -1,0 +1,44 @@
+uuid: 901f7336-b34b-4e5d-bd65-bb4a2463abc4
+langcode: en
+status: true
+dependencies:
+  module:
+    - ctools
+    - neuronet_misc
+    - system
+    - user
+  theme:
+    - bootstrap
+id: addjobblock
+theme: bootstrap
+region: sidebar_second
+weight: -10
+provider: null
+plugin: add_job_block
+settings:
+  id: add_job_block
+  label: 'Add job block'
+  label_display: '0'
+  provider: neuronet_misc
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      profile: profile
+  user_role:
+    id: user_role
+    negate: false
+    context_mapping:
+      user: '@user.current_user_context:current_user'
+    roles:
+      administrator: administrator
+      alumni: alumni
+      deputy_admin: deputy_admin
+  request_path:
+    id: request_path
+    negate: true
+    context_mapping: {  }
+    pages: "/node/*/edit\r\n/node/*/account\r\n/node/*/my-job-posts\r\n"

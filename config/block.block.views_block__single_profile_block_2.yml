@@ -1,0 +1,39 @@
+uuid: a48e1aff-01c2-4082-a882-c5426f776d0f
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.single_profile
+  module:
+    - ctools
+    - system
+    - views
+  theme:
+    - bootstrap
+id: views_block__single_profile_block_2
+theme: bootstrap
+region: content
+weight: -7
+provider: null
+plugin: 'views_block:single_profile-block_2'
+settings:
+  id: 'views_block:single_profile-block_2'
+  label: ''
+  label_display: visible
+  provider: views
+  context_mapping: {  }
+  views_label: ''
+  items_per_page: none
+visibility:
+  'entity_bundle:node':
+    id: 'entity_bundle:node'
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      profile: profile
+  request_path:
+    id: request_path
+    negate: true
+    context_mapping: {  }
+    pages: "/node/*/edit\r\n/node/*/account\r\n/node/*/my-job-posts\r\n"

@@ -1,5 +1,0 @@
-name: 'Display Suite Test RDF'
-description: 'Test module for Display Suite RDF integratin'
-core_version_requirement: ^8.8 || ^9
-package: 'Display Suite'
-type: module

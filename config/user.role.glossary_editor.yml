@@ -1,0 +1,27 @@
+uuid: ad239310-666a-4de8-839e-2da452e5b72c
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.basic_html
+    - filter.format.restricted_html
+    - taxonomy.vocabulary.glossary
+  module:
+    - filter
+    - glia_glossary
+    - system
+    - taxonomy
+    - toolbar
+id: glossary_editor
+label: 'Glossary Editor'
+weight: 6
+is_admin: null
+permissions:
+  - 'access glia admin'
+  - 'access toolbar'
+  - 'create terms in glossary'
+  - 'delete terms in glossary'
+  - 'edit terms in glossary'
+  - 'use text format basic_html'
+  - 'use text format restricted_html'
+  - 'view the administration theme'

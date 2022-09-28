@@ -2,5 +2,4 @@ type: module
 name: Token Module Test
 description: Testing module for token functionality.
 package: Testing
-core_version_requirement: ^8.7.7 || ^9
 hidden: TRUE

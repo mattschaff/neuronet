@@ -2,4 +2,5 @@ name: Neuronet Miscellaneous
 type: module
 description: Adds miscellaneous functionality to the NeuroNet website
 core: 8.x
+core_version_requirement: ^8 || ^9
 package: Custom

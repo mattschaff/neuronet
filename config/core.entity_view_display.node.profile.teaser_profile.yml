@@ -1,0 +1,187 @@
+uuid: 85f4408b-919f-488e-a9a6-cb6f01a2b3e1
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser_profile
+    - field.field.node.profile.body
+    - field.field.node.profile.feeds_item
+    - field.field.node.profile.field_alma_mater
+    - field.field.node.profile.field_alumni
+    - field.field.node.profile.field_candidacy_
+    - field.field.node.profile.field_certificate_programs
+    - field.field.node.profile.field_classes_taken
+    - field.field.node.profile.field_curriculum_vitae
+    - field.field.node.profile.field_degree
+    - field.field.node.profile.field_degree_pursued
+    - field.field.node.profile.field_email
+    - field.field.node.profile.field_entry_term
+    - field.field.node.profile.field_exit_term
+    - field.field.node.profile.field_fellowships_training_grant
+    - field.field.node.profile.field_first_name
+    - field.field.node.profile.field_grad_group
+    - field.field.node.profile.field_help_with
+    - field.field.node.profile.field_hometown_s_
+    - field.field.node.profile.field_journal_club
+    - field.field.node.profile.field_lab_rotations
+    - field.field.node.profile.field_last_name
+    - field.field.node.profile.field_links
+    - field.field.node.profile.field_links2
+    - field.field.node.profile.field_locations_lived
+    - field.field.node.profile.field_matriculation_year
+    - field.field.node.profile.field_neuroscience_interests
+    - field.field.node.profile.field_ngg_activities
+    - field.field.node.profile.field_non_ngg_activities
+    - field.field.node.profile.field_preferred_first_name_comp
+    - field.field.node.profile.field_preferred_prefix
+    - field.field.node.profile.field_preferred_pronouns
+    - field.field.node.profile.field_profile_image
+    - field.field.node.profile.field_research_area
+    - field.field.node.profile.field_show_to_alumni
+    - field.field.node.profile.field_show_to_students
+    - field.field.node.profile.field_thesis_committee
+    - field.field.node.profile.field_thesis_lab
+    - field.field.node.profile.field_undergraduate_major
+    - node.type.profile
+  module:
+    - ds
+    - file
+    - image
+    - user
+third_party_settings:
+  ds:
+    layout:
+      id: bs_2col_stacked
+      library: null
+      disable_css: false
+      entity_classes: all_classes
+      settings:
+        layout:
+          wrapper: div
+          classes:
+            row: row
+          add_layout_class: 1
+          attributes: ''
+        regions:
+          top:
+            wrapper: div
+            classes:
+              col-sm-12: col-sm-12
+            add_region_classes: 1
+            attributes: ''
+          left:
+            wrapper: div
+            classes:
+              col-sm-4: col-sm-4
+            add_region_classes: 1
+            attributes: ''
+          right:
+            wrapper: div
+            classes:
+              col-sm-8: col-sm-8
+            add_region_classes: 1
+            attributes: ''
+          bottom:
+            wrapper: div
+            classes:
+              col-sm-12: col-sm-12
+            add_region_classes: 1
+            attributes: ''
+    regions:
+      left:
+        - field_profile_image
+        - field_email
+        - field_thesis_lab
+      right:
+        - field_matriculation_year
+        - field_curriculum_vitae
+        - field_neuroscience_interests
+id: node.profile.teaser_profile
+targetEntityType: node
+bundle: profile
+mode: teaser_profile
+content:
+  field_curriculum_vitae:
+    type: file_default
+    label: above
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 4
+    region: right
+  field_email:
+    type: email_mailto
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: left
+  field_matriculation_year:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
+    region: right
+  field_neuroscience_interests:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 5
+    region: right
+  field_profile_image:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: ''
+    third_party_settings: {  }
+    weight: 0
+    region: left
+  field_thesis_lab:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings:
+      ds:
+        ds_limit: ''
+    weight: 2
+    region: left
+hidden:
+  body: true
+  feeds_item: true
+  field_alma_mater: true
+  field_alumni: true
+  field_candidacy_: true
+  field_certificate_programs: true
+  field_classes_taken: true
+  field_degree: true
+  field_degree_pursued: true
+  field_entry_term: true
+  field_exit_term: true
+  field_fellowships_training_grant: true
+  field_first_name: true
+  field_grad_group: true
+  field_help_with: true
+  field_hometown_s_: true
+  field_journal_club: true
+  field_lab_rotations: true
+  field_last_name: true
+  field_links: true
+  field_links2: true
+  field_locations_lived: true
+  field_ngg_activities: true
+  field_non_ngg_activities: true
+  field_preferred_first_name_comp: true
+  field_preferred_prefix: true
+  field_preferred_pronouns: true
+  field_research_area: true
+  field_show_to_alumni: true
+  field_show_to_students: true
+  field_thesis_committee: true
+  field_undergraduate_major: true
+  links: true

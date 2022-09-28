@@ -1,0 +1,33 @@
+uuid: efe426ba-afa2-4c0d-9bf4-001a84d0be3f
+langcode: en
+status: true
+dependencies:
+  config:
+    - page_manager.page.glia_meeting_sign_in
+  module:
+    - glia_signin
+id: glia_meeting_sign_in-block_display-0
+label: 'Block page'
+weight: 0
+variant: block_display
+variant_settings:
+  id: block_display
+  label: null
+  weight: 0
+  uuid: 216dd5bd-5640-499e-826b-f6e710b0fc0c
+  blocks:
+    551fb8dc-3829-4fcd-8304-165c75dc9786:
+      id: signin_block
+      label: 'GLIA Sign-in'
+      label_display: '0'
+      provider: glia_signin
+      context_mapping: {  }
+      region: top
+      weight: 0
+      uuid: 551fb8dc-3829-4fcd-8304-165c75dc9786
+      signin_block_url: 'https://script.google.com/macros/s/AKfycbzTvjrLnYsmWGmgDIETWLP3NR8PrUte3dlkb0gYpT6BT9sfAqh-9dertSxo9-5JM4c7gQ/exec'
+  page_title: 'GLIA Meeting Sign-in'
+page: glia_meeting_sign_in
+selection_criteria: {  }
+selection_logic: and
+static_context: {  }

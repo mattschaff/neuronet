@@ -1,0 +1,22 @@
+uuid: 8ce1ea4e-e75e-4303-9489-e2fc3287ec30
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - neuronet_home
+_core:
+  default_config_hash: wDR9JKEATSWldBjw8du8s3G2zjEYeQf88nlld11hMLo
+id: neuronet_home_breadcrumbs
+theme: neuronet_home
+region: header
+weight: -7
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Breadcrumbs
+  label_display: '0'
+  provider: system
+visibility: {  }

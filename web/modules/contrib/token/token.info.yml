@@ -1,4 +1,4 @@
 type: module
 name: Token
 description: Provides a user interface for the Token API and some missing core tokens.
-core_version_requirement: ^8.8 || ^9
+core_version_requirement: ^9.2 || ^10

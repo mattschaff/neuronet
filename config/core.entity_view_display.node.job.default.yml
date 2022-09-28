@@ -1,0 +1,87 @@
+uuid: e255c1ed-ab59-447c-b795-dc0f3c7eefc6
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.job.feeds_item
+    - field.field.node.job.field_department
+    - field.field.node.job.field_institution
+    - field.field.node.job.field_job_term
+    - field.field.node.job.field_job_type
+    - field.field.node.job.field_last_
+    - field.field.node.job.field_profile
+    - field.field.node.job.field_start_date
+    - node.type.job
+  module:
+    - datetime
+    - user
+id: node.job.default
+targetEntityType: node
+bundle: job
+mode: default
+content:
+  field_department:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 108
+    region: content
+  field_institution:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 101
+    region: content
+  field_job_term:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  field_job_type:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 103
+    region: content
+  field_last_:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_profile:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 107
+    region: content
+  field_start_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden:
+  feeds_item: true

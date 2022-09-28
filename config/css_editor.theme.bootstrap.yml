@@ -1,0 +1,5 @@
+path: 'public://css_editor/bootstrap.css'
+enabled: true
+css: ".form-group {\r\n\tmargin-bottom: 15px !important;\r\n}"
+plaintext_enabled: false
+autopreview_enabled: false

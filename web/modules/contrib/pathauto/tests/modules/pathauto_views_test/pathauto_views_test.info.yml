@@ -2,6 +2,5 @@ name: 'Views Test Config'
 type: module
 description: 'Provides default views for tests.'
 package: Testing
-core_version_requirement: ^8.8 || ^9
 dependencies:
   - drupal:views

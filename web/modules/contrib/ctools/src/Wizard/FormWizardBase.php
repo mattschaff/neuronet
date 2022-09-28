@@ -128,7 +128,7 @@ abstract class FormWizardBase extends FormBase implements FormWizardInterface {
   public function initValues() {
     $values = [];
     $event = new WizardEvent($this, $values);
-    $this->dispatcher->dispatch(FormWizardInterface::LOAD_VALUES, $event);
+    $this->dispatcher->dispatch($event, FormWizardInterface::LOAD_VALUES);
     return $event->getValues();
   }
 

@@ -1,5 +1,4 @@
 name: 'Pathauto custom punctuation testing module'
 type: module
-core_version_requirement: ^8.8 || ^9
 description: 'Add some uncommon punctuation to the replacement list.'
 package: Testing

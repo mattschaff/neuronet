@@ -1,0 +1,111 @@
+uuid: 934f3c4b-c5d8-4c76-8d6f-f34ad1c09574
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.job_posting.field_description
+    - field.field.node.job_posting.field_institution
+    - field.field.node.job_posting.field_interests
+    - field.field.node.job_posting.field_links
+    - field.field.node.job_posting.field_salary_high
+    - field.field.node.job_posting.field_salary_low
+    - field.field.node.job_posting.field_send_email_notifications
+    - field.field.node.job_posting.field_stage
+    - field.field.node.job_posting.field_start_date
+    - node.type.job_posting
+  module:
+    - datetime
+    - link
+    - options
+    - text
+    - user
+id: node.job_posting.default
+targetEntityType: node
+bundle: job_posting
+mode: default
+content:
+  field_description:
+    type: text_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 105
+    region: content
+  field_institution:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 104
+    region: content
+  field_interests:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 107
+    region: content
+  field_links:
+    type: link
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 106
+    region: content
+  field_salary_high:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 110
+    region: content
+  field_salary_low:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 109
+    region: content
+  field_send_email_notifications:
+    type: boolean
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    weight: 112
+    region: content
+  field_stage:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 111
+    region: content
+  field_start_date:
+    type: datetime_default
+    label: above
+    settings:
+      timezone_override: ''
+      format_type: medium
+    third_party_settings: {  }
+    weight: 102
+    region: content
+  links:
+    settings: {  }
+    third_party_settings: {  }
+    weight: 100
+    region: content
+hidden: {  }

@@ -1,0 +1,177 @@
+uuid: 9caa0554-7fd4-44f1-aa56-94f7463a3f93
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.full_html
+    - node.type.article
+    - node.type.email
+    - node.type.job
+    - node.type.job_posting
+    - node.type.page
+    - node.type.profile
+    - taxonomy.vocabulary.academic_term
+    - taxonomy.vocabulary.alma_mater
+    - taxonomy.vocabulary.classes_taken
+    - taxonomy.vocabulary.degree
+    - taxonomy.vocabulary.fellowships_training_grants_awar
+    - taxonomy.vocabulary.grad_group
+    - taxonomy.vocabulary.i_can_help_with
+    - taxonomy.vocabulary.institution
+    - taxonomy.vocabulary.job_title
+    - taxonomy.vocabulary.job_type
+    - taxonomy.vocabulary.journal_clubs
+    - taxonomy.vocabulary.locations_lived
+    - taxonomy.vocabulary.matriculation_year
+    - taxonomy.vocabulary.neuroscience_interests
+    - taxonomy.vocabulary.ngg_related_extracurricular_acti
+    - taxonomy.vocabulary.non_ngg_related_extracurricular_
+    - taxonomy.vocabulary.research_area
+    - taxonomy.vocabulary.tags
+    - taxonomy.vocabulary.thesis_lab
+    - taxonomy.vocabulary.undergraduate_major
+  module:
+    - block_content
+    - comment
+    - contact
+    - feeds
+    - field_ui
+    - filter
+    - glia_glossary
+    - neuronet_misc
+    - node
+    - node_view_permissions
+    - shortcut
+    - system
+    - taxonomy
+    - toolbar
+    - views_ui
+id: deputy_admin
+label: 'NeuroNet Manager'
+weight: 4
+is_admin: null
+permissions:
+  - 'access content'
+  - 'access glia admin'
+  - 'access neuronet admin'
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'access user profiles'
+  - 'administer block_content display'
+  - 'administer block_content form display'
+  - 'administer comment display'
+  - 'administer comment form display'
+  - 'administer contact_message display'
+  - 'administer contact_message form display'
+  - 'administer content types'
+  - 'administer feeds_feed display'
+  - 'administer feeds_feed form display'
+  - 'administer node display'
+  - 'administer node fields'
+  - 'administer node form display'
+  - 'administer taxonomy'
+  - 'administer taxonomy_term display'
+  - 'administer taxonomy_term form display'
+  - 'administer user display'
+  - 'administer user fields'
+  - 'administer user form display'
+  - 'administer views'
+  - 'create article content'
+  - 'create email content'
+  - 'create job content'
+  - 'create job_posting content'
+  - 'create page content'
+  - 'create profile content'
+  - 'create terms in academic_term'
+  - 'create terms in alma_mater'
+  - 'create terms in classes_taken'
+  - 'create terms in degree'
+  - 'create terms in fellowships_training_grants_awar'
+  - 'create terms in grad_group'
+  - 'create terms in i_can_help_with'
+  - 'create terms in institution'
+  - 'create terms in job_title'
+  - 'create terms in job_type'
+  - 'create terms in journal_clubs'
+  - 'create terms in locations_lived'
+  - 'create terms in matriculation_year'
+  - 'create terms in neuroscience_interests'
+  - 'create terms in ngg_related_extracurricular_acti'
+  - 'create terms in non_ngg_related_extracurricular_'
+  - 'create terms in research_area'
+  - 'create terms in tags'
+  - 'create terms in thesis_lab'
+  - 'create terms in undergraduate_major'
+  - 'delete any article content'
+  - 'delete any email content'
+  - 'delete any job content'
+  - 'delete any job_posting content'
+  - 'delete any page content'
+  - 'delete any profile content'
+  - 'delete own article content'
+  - 'delete own email content'
+  - 'delete own job content'
+  - 'delete own job_posting content'
+  - 'delete own page content'
+  - 'delete own profile content'
+  - 'delete terms in academic_term'
+  - 'delete terms in alma_mater'
+  - 'delete terms in classes_taken'
+  - 'delete terms in degree'
+  - 'delete terms in fellowships_training_grants_awar'
+  - 'delete terms in grad_group'
+  - 'delete terms in i_can_help_with'
+  - 'delete terms in institution'
+  - 'delete terms in job_title'
+  - 'delete terms in job_type'
+  - 'delete terms in journal_clubs'
+  - 'delete terms in locations_lived'
+  - 'delete terms in matriculation_year'
+  - 'delete terms in neuroscience_interests'
+  - 'delete terms in ngg_related_extracurricular_acti'
+  - 'delete terms in non_ngg_related_extracurricular_'
+  - 'delete terms in research_area'
+  - 'delete terms in tags'
+  - 'delete terms in thesis_lab'
+  - 'delete terms in undergraduate_major'
+  - 'edit any article content'
+  - 'edit any email content'
+  - 'edit any job content'
+  - 'edit any job_posting content'
+  - 'edit any page content'
+  - 'edit any profile content'
+  - 'edit own article content'
+  - 'edit own email content'
+  - 'edit own job content'
+  - 'edit own job_posting content'
+  - 'edit own page content'
+  - 'edit own profile content'
+  - 'edit terms in academic_term'
+  - 'edit terms in alma_mater'
+  - 'edit terms in classes_taken'
+  - 'edit terms in degree'
+  - 'edit terms in fellowships_training_grants_awar'
+  - 'edit terms in grad_group'
+  - 'edit terms in i_can_help_with'
+  - 'edit terms in institution'
+  - 'edit terms in job_title'
+  - 'edit terms in job_type'
+  - 'edit terms in journal_clubs'
+  - 'edit terms in locations_lived'
+  - 'edit terms in matriculation_year'
+  - 'edit terms in neuroscience_interests'
+  - 'edit terms in ngg_related_extracurricular_acti'
+  - 'edit terms in non_ngg_related_extracurricular_'
+  - 'edit terms in research_area'
+  - 'edit terms in tags'
+  - 'edit terms in thesis_lab'
+  - 'edit terms in undergraduate_major'
+  - 'switch shortcut sets'
+  - 'use text format full_html'
+  - 'view any email content'
+  - 'view any job content'
+  - 'view any profile content'
+  - 'view own job content'
+  - 'view own job_posting content'
+  - 'view own profile content'
+  - 'view the administration theme'

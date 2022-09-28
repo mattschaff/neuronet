@@ -2,8 +2,10 @@
 name: NeuroNet Home
 type: theme
 description: 'NeuroNet Homepage Theme'
+base theme: stable
 package: NeuroNet
 core: 8.x
+core_version_requirement: ^8 || ^9
 libraries:
   - neuronet_home/global-styling
 

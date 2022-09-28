@@ -1,0 +1,25 @@
+uuid: 30c85481-ef68-4917-b29b-fb6ad0ed30a4
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:ee4ec76c-8ee5-4a37-a7a2-96f3704b8855'
+  module:
+    - block_content
+  theme:
+    - neuronet_home
+id: neuronet_home_credits
+theme: neuronet_home
+region: footer
+weight: 0
+provider: null
+plugin: 'block_content:ee4ec76c-8ee5-4a37-a7a2-96f3704b8855'
+settings:
+  id: 'block_content:ee4ec76c-8ee5-4a37-a7a2-96f3704b8855'
+  label: Credits
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

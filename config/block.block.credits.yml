@@ -1,0 +1,25 @@
+uuid: aca2e20d-c292-4e26-83b3-4342749f38dc
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:ee4ec76c-8ee5-4a37-a7a2-96f3704b8855'
+  module:
+    - block_content
+  theme:
+    - bootstrap
+id: credits
+theme: bootstrap
+region: footer
+weight: 0
+provider: null
+plugin: 'block_content:ee4ec76c-8ee5-4a37-a7a2-96f3704b8855'
+settings:
+  id: 'block_content:ee4ec76c-8ee5-4a37-a7a2-96f3704b8855'
+  label: Credits
+  label_display: '0'
+  provider: block_content
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }
