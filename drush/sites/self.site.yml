@@ -7,29 +7,29 @@ docksal:
   uri: http://neuronet-composer.docksal
 
 test:
-  host: hosting.pmacs.upenn.edu
+  host: hosting2.pmacs.upenn.edu
   options:
     php: /opt/remi/php73/oot/usr/bin/php
     site: NeuroNet
   root: /home/neuronet/deployments/test/web
-  uri: https://www.neuronetupenn.org/neuronet-test
+  uri: https://hosting2.pmacs.upenn.edu/neuronet/neuronet-test
   user: ${env.NEURONET_SSH_USER}
   paths:
     drush-script: /home/neuronet/deployments/test/vendor/bin/drush
 
 prod:
-  host: hosting.pmacs.upenn.edu
+  host: hosting2.pmacs.upenn.edu
   options:
     php: /opt/remi/php73/oot/usr/bin/php
     site: NeuroNet
   root: /home/neuronet/deployments/prod/web
-  uri: https://www.neuronetupenn.org
+  uri: https://hosting2.pmacs.upenn.edu/neuronet
   user: ${env.NEURONET_SSH_USER}
   paths:
     drush-script: /home/neuronet/deployments/prod/vendor/bin/drush
 
 staging:
-  host: hosting.pmacs.upenn.edu
+  host: hosting2.pmacs.upenn.edu
   options:
     php: /opt/remi/php73/oot/usr/bin/php
     site: NeuroNet
