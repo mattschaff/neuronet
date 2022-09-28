@@ -20,7 +20,7 @@ variant_settings:
       weight: 0
       uuid: 551fb8dc-3829-4fcd-8304-165c75dc9786
       context_mapping: {  }
-      signin_block_url: 'https://script.google.com/macros/s/AKfycbyK-kCfi08Tom5GHpHCPME7_OyNAVHNy4OxfAeYZEx_2q0bQGJwm2dRdCQfXyJzjs3v/exec'
+      signin_block_url: 'https://script.google.com/macros/s/AKfycbzTvjrLnYsmWGmgDIETWLP3NR8PrUte3dlkb0gYpT6BT9sfAqh-9dertSxo9-5JM4c7gQ/exec'
   id: block_display
   uuid: 216dd5bd-5640-499e-826b-f6e710b0fc0c
   label: null
