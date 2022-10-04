@@ -5,3 +5,8 @@ core_version_requirement: ^9 || ^10
 package: 'Display Suite'
 dependencies:
   - ds:ds
+
+# Information added by Drupal.org packaging script on 2022-09-10
+version: '8.x-3.15'
+project: 'ds'
+datestamp: 1662818541

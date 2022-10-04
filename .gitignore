@@ -71,9 +71,10 @@ Thumbs.db
 docksal-local.env
 docksal-local.yml
 
-# Site-specific .htaccess settings #
-#################################
+# Scaffoldedd and site-specific .htaccess settings #
+####################################################
 /assets/site-addons.htaccess
+/web/.htaccess
 
 # Ignore manually cloned modules to avoid making submodule #
 /web/modules/contrib/views_distinct
